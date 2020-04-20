@@ -1,0 +1,30 @@
+{
+    "name": "supsign/auto-sync-bundle",
+    "type": "symfony-bundle",
+    "description": "Contao 4.8 FTP Auto Sync Bundle",
+    "homepage": "https://contao.org",
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Supsign",
+            "homepage": "https://github.com/Supsign"
+        }
+    ],
+    "require": {
+        "php": "^7.0",
+        "contao/core-bundle": ">=4.9"
+    },
+    "extra": {
+        "contao-manager-plugin": "Supsign\\ContaoAutoSyncBundle\\ContaoManager\\Plugin"
+    },
+    "autoload": {
+        "psr-4": {
+            "Supsign\\ContaoAutoSyncBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Supsign\\ContaoAutoSyncBundle\\Tests\\": "tests/"
+        }
+    }
+}

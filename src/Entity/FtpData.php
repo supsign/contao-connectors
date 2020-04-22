@@ -38,6 +38,36 @@ class FtpData
      */
     protected $description;
 
+    /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    protected $ftpProtocolId;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", options={"default" : ""})
+     */
+    protected $server;
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", options={"default" : ""})
+     */
+    protected $port; 
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", options={"default" : ""})
+     */
+    protected $user; 
+
+    /**
+     * @var string
+     * @ORM\Column(type="string", options={"default" : ""})
+     */
+    protected $password; 
+
     // Diese Funktion ist sehr hilfreich, um alle Daten als Array zu erhalten. 
     public function getData() {
         $arrData = [];
@@ -128,6 +158,126 @@ class FtpData
     public function setDescription(string $description)
     {
         $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of title
+     *
+     * @return  int
+     */ 
+    public function getFtpProtocolId(): int
+    {
+        return $this->ftpProtocolId;
+    }
+
+    /**
+     * Set the value of ftpProtocolId
+     *
+     * @param  int  $ftpProtocolId
+     *
+     * @return  self
+     */ 
+    public function setFtpProtocolId(int $ftpProtocolId)
+    {
+        $this->ftpProtocolId = $ftpProtocolId;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of title
+     *
+     * @return  string
+     */ 
+    public function getServer()
+    {
+        return $this->server;
+    }
+
+    /**
+     * Set the value of server
+     *
+     * @param  string  $server
+     *
+     * @return  self
+     */ 
+    public function setServer(string $server)
+    {
+        $this->server = $server;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of title
+     *
+     * @return  string
+     */ 
+    public function getPort()
+    {
+        return $this->port;
+    }
+
+    /**
+     * Set the value of port
+     *
+     * @param  string  $port
+     *
+     * @return  self
+     */ 
+    public function setPort(string $port)
+    {
+        $this->port = $port;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of title
+     *
+     * @return  string
+     */ 
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * Set the value of user
+     *
+     * @param  string  $user
+     *
+     * @return  self
+     */ 
+    public function setUser(string $user)
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of title
+     *
+     * @return  string
+     */ 
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @param  string  $password
+     *
+     * @return  self
+     */ 
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
 
         return $this;
     }

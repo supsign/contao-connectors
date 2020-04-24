@@ -1,1 +1,12 @@
 services:
+    Supsign\ContaoConnectorsBundle\EventListener\BackendMenuListener:
+        arguments:
+            - "@router"
+            - "@request_stack"
+        tags:
+            - { 
+                name: kernel.event_listener,
+                event: contao.backend_menu_build,
+                method: onBuild,
+                priority: -255
+              }

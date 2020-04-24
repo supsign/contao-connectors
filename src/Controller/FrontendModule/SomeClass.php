@@ -1,6 +1,6 @@
 <?php
 
-namespace Supsign\ContaoAutoSyncBundle\Controller\FrontendModule;
+namespace Supsign\ContaoConnectorsBundle\Controller\FrontendModule;
 
 class someClass
 {

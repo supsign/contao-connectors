@@ -1,6 +1,6 @@
 <?php
 
-namespace Supsign\ContaoAutoSyncBundle\Repository;
+namespace Supsign\ContaoConnectorsBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

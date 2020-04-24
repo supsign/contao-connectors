@@ -15,16 +15,16 @@
         "contao/core-bundle": ">=4.9"
     },
     "extra": {
-        "contao-manager-plugin": "Supsign\\ContaoAutoSyncBundle\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "Supsign\\ContaoConnectorsBundle\\ContaoManager\\Plugin"
     },
     "autoload": {
         "psr-4": {
-            "Supsign\\ContaoAutoSyncBundle\\": "src/"
+            "Supsign\\ContaoConnectorsBundle\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Supsign\\ContaoAutoSyncBundle\\Tests\\": "tests/"
+            "Supsign\\ContaoConnectorsBundle\\Tests\\": "tests/"
         }
     }
 }

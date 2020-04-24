@@ -1,13 +1,13 @@
 <?php
 
-namespace Supsign\ContaoAutoSyncBundle\DependencyInjection;
+namespace Supsign\ContaoConnectorsBundle\DependencyInjection;
 
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
-class ContaoAutoSyncExtension extends Extension
+class ContaoConnectorsExtension extends Extension
 {
     /**
      * {@inheritdoc}

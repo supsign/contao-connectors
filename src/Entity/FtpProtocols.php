@@ -1,6 +1,6 @@
 <?php
 
-namespace Supsign\ContaoAutoSyncBundle\Entity;
+namespace Supsign\ContaoConnectorsBundle\Entity;
 use \Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -8,7 +8,7 @@ use \Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  * @ORM\Table(name="tl_ftp_protocls")
- * @ORM\Entity(repositoryClass="Supsign\ContaoAutoSyncBundle\Repository\AutoSyncRepository")
+ * @ORM\Entity(repositoryClass="Supsign\ContaoConnectorsBundle\Repository\ConnectorsRepository")
  */
 class FtpProtocols
 {

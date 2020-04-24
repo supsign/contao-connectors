@@ -1,7 +1,7 @@
 {
-    "name": "supsign/auto-sync-bundle",
+    "name": "supsign/contao-connectors",
     "type": "symfony-bundle",
-    "description": "Contao 4.8 FTP Auto Sync Bundle",
+    "description": "Contao 4.8 FTP Connector Bundle",
     "homepage": "https://contao.org",
     "license": "LGPL-3.0-or-later",
     "authors": [

@@ -17,11 +17,6 @@ use Contao\MemberGroupModel;
  */
 class BackendController extends AbstractController
 {
-
-    /**
-     * @Route("/ftpconnector", name="supsign.ftpconnector")
-     */
-
     public function __invoke()
     {
         $data = [];

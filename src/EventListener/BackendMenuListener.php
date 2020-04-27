@@ -2,6 +2,7 @@
 
 namespace Supsign\ContaoConnectorsBundle\EventListener;
 
+use Supsign\ContaoConnectorsBundle\Controller\BackendController;
 use Contao\CoreBundle\Event\MenuEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;

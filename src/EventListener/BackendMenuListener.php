@@ -26,7 +26,26 @@ class BackendMenuListener
             return;
 
         if (!$tree->getChild('supsign') ) {
+            $node = $factory
+                ->createItem('supsign')
+                    ->setUri('/')
+                    ->setLabel('MSC.supisgn')
+                    ->setLinkAttribute('class', 'group-system')
+                    ->setLinkAttribute('onclick', "return AjaxRequest.toggleNavigation(this, 'supsign', '/')")
+                    ->setChildrenAttribute('id', 'supsign')
+                    ->setExtra('translation_domain', 'contao_default');
 
-    	}
+            $contentNode = $tree->addChild($node);
+        }
+
+        $menuItem = $factory
+            ->createItem('attendance-list')
+                ->setUri($this->router->generate('supsign.ftpConnections') )
+                ->setLabel('MSC.ftpConnectionsName')
+                ->setLinkAttribute('title', 'MSC.ftpConnectionsTitle')
+                ->setCurrent($this->requestStack->getCurrentRequest()->get('_backend_module') === 'contao-connectors')
+                ->setExtra('translation_domain', 'contao_default');
+
+        $contentNode->addChild($menuItem);
     }
 }

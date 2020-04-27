@@ -22,43 +22,9 @@ class BackendController extends AbstractController
      * @Route("/ftpconnector", name="supsign.ftpconnector")
      */
 
-    public function default()
+    public function __invoke()
     {
-
-    	// $query = MemberModel::findOneById(16);
-
-    	// var_dump($query);
-
-    	// $query = MemberModel::findOneById(35);
-
-    	// var_dump($query);
-
-    	// var_dump($_POST);
-
-    	$submit = extract($_POST) > 0;
-
-    	$members = MemberModelAdvanced::findOneById(20);
-
-    	var_dump($members);
-
-    	if ($submit) {
-	    	// $query = MemberModel::findByGroups($selectedMemberGroups);
-
-    		// // $query = MemberModel::findBy()
-
-
-	    	// var_dump($query);
-
-	    	// foreach ($selectedMemberGroups AS $selectedMemberGroup) {
-		    // 	$query = MemberModel::findOneByGroups($selectedMemberGroup);
-		    // 	var_dump($query);
-	    	// }
-    	}
-
-
-    	$data = [
-    		'memberGroups' => MemberGroupModel::findAll()
-    	];
+        $data = [];
 
         return new Response(
             $this->get('twig')->render('default.html.twig', $data)

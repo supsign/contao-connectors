@@ -19,7 +19,7 @@ class BackendController extends AbstractController
 {
 
     /**
-     * @Route("/ftpconnector", name="supsign.ftpconnector")
+     * @Route("/ftpconnector", name="supsign.ftpConnections")
      */
 
     public function __invoke()

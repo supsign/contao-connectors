@@ -40,7 +40,7 @@ class BackendMenuListener
 
         $menuItem = $factory
             ->createItem('contao-connectors')
-                ->setUri($this->router->generate('supsign.ftpConnections') )
+                ->setUri($this->router->generate('supsign.ftpconnector') )
                 ->setLabel('MSC.ftpConnectionsName')
                 ->setLinkAttribute('title', 'MSC.ftpConnectionsTitle')
                 ->setCurrent($this->requestStack->getCurrentRequest()->get('_backend_module') === 'contao-connectors')

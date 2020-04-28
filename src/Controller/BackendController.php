@@ -34,7 +34,18 @@ class BackendController extends AbstractController
     public function add()
     {
         return new Response(
-            $this->get('twig')->render('@ContaoConnectors/default.html.twig', [])
+            $this->get('twig')->render('@ContaoConnectors/add.html.twig', [])
+        );
+    }
+
+    /**
+     * @Route("/ftp-connections/edit", name="supsign.connectors.edit")
+     */
+
+    public function edit()
+    {
+        return new Response(
+            $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])
         );
     }
 }

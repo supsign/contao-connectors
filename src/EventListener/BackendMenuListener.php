@@ -29,7 +29,7 @@ class BackendMenuListener
 	        $node = $factory
 	            ->createItem('supsign')
 		            ->setUri('/')
-		            ->setLabel('MSC.supisgn')
+		            ->setLabel('Supisgn')
 		            ->setLinkAttribute('class', 'group-system')
 		            ->setLinkAttribute('onclick', "return AjaxRequest.toggleNavigation(this, 'supsign', '/')")
 		            ->setChildrenAttribute('id', 'supsign')
@@ -41,8 +41,8 @@ class BackendMenuListener
         $menuItem = $factory
             ->createItem('connectors')
 	            ->setUri($this->router->generate('supsign.Connectors') )
-	            ->setLabel('MSC.ConnectorsName')
-	            ->setLinkAttribute('title', 'MSC.ConnectorsTitle')														//	translation geht hier wohl nicht?
+	            ->setLabel('FTP Verbindungen')
+	            ->setLinkAttribute('title', 'FTP Verbindungen verwalten')
 	            ->setCurrent($this->requestStack->getCurrentRequest()->get('_backend_module') === 'connectors')
 	            ->setExtra('translation_domain', 'contao_default');
 

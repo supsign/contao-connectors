@@ -26,18 +26,4 @@ class BackendController extends AbstractController
             $this->get('twig')->render('@ContaoConnectors/default.html.twig', [])
         );
     }
-
-
-    /**
-     * @Route("/Connectors/new", name="supsign.Connectors.archive")
-     */
-
-    public function archive()
-    {
-        return new Response(
-            $this->get('twig')->render('@ContaoConnectors/archive.html.twig', [])
-        );
-    }
-
-
 }

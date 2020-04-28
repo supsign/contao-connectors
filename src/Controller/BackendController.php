@@ -5,6 +5,8 @@ namespace Supsign\ContaoConnectorsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Supsign\ContaoConnectorsBundle\Entity\FtpData;
+use Supsign\ContaoConnectorsBundle\Entity\FtpProtocols;
 
 /**
  * @Route("/contao", defaults={
@@ -44,6 +46,12 @@ class BackendController extends AbstractController
 
     public function edit()
     {
+
+        $test = FtpProtocols::findAll();
+
+        var_dump($test);
+
+
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])
         );

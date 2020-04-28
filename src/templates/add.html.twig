@@ -13,7 +13,21 @@
 {% block main %}
     <div class="tl_listing_container">
 
-
+        <div>
+            <form method="post" action="">
+            	<select>
+            		{% for ftpProtocols in ftpProtocol %}
+            			<option>{{ftpProtocol.title}}</option>
+            		{% endfor %}
+            	</select>
+            	<input type="text" name="Name"/><br/>
+            	<input type="text" name="Beschreibung"/><br/>
+            	<input type="text" name="Server"/><br/>
+            	<input type="text" name="Port"/><br/>
+            	<input type="text" name="User"/><br/>
+            	<input type="text" name="Password"/><br/>
+            </form>
+        </div>
 
     </div>
 {% endblock %}

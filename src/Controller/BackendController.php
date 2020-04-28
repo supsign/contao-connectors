@@ -17,7 +17,7 @@ class BackendController extends AbstractController
 {
 
     /**
-     * @Route("/Connectors", name="supsign.Connectors")
+     * @Route("/ftp-connections", name="supsign.connectors")
      */
 
     public function default()

@@ -40,7 +40,7 @@ class BackendMenuListener
 
         $menuItem = $factory
             ->createItem('connectors')
-	            ->setUri($this->router->generate('supsign.Connectors') )
+	            ->setUri($this->router->generate('supsign.connectors') )
 	            ->setLabel('FTP Verbindungen')
 	            ->setLinkAttribute('title', 'FTP Verbindungen verwalten')
 	            ->setCurrent($this->requestStack->getCurrentRequest()->get('_backend_module') === 'connectors')

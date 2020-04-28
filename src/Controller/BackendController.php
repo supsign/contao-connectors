@@ -35,8 +35,10 @@ class BackendController extends AbstractController
 
     public function add()
     {
-        $ftp  = (new StdClass)->title = 'FTP';
-        $sftp = (new StdClass)->title = 'SFTP'
+        $ftp  = (new StdClass);
+        $ftp->title = 'FTP';
+        $sftp = (new StdClass);
+        $sftp->title = 'SFTP';
 
         $data = ['ftpProtocols' => array($ftp, $sftp)];
 

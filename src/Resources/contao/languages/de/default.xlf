@@ -5,13 +5,13 @@
         <source></source>
         <target>Supgsin</target>
       </trans-unit>
-      <trans-unit id="MSC.ftpConnectionsName">
+      <trans-unit id="MSC.ConnectorsName">
         <source></source>
-        <target>FTP Zugänge</target>
+        <target>Test Name</target>
       </trans-unit>
-      <trans-unit id="MSC.ftpConnectionsTitle">
+      <trans-unit id="MSC.ConnectorsTitle">
         <source></source>
-        <target>FTP Zugänge</target>
+        <target>Test Title</target>
       </trans-unit>
     </body>
   </file>

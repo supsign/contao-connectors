@@ -1,7 +1,7 @@
 {% extends "@ContaoCore/Backend/be_page.html.twig" %}
 
 {% block headline %}
-    FTP Connection
+    Präsenzliste
 {% endblock %}
 
 
@@ -12,6 +12,20 @@
 
 {% block main %}
     <div class="tl_listing_container">
+
+        <div>
+            <form method="post" action="">
+                Titel: <input type="text" name="title"/><br/>
+                Datum: <input type="date" name="date"/><br/>
+
+                Gruppen:<br/>
+                {% for memberGroup in memberGroups %}
+                    <input type="checkbox" name="selectedMemberGroups[]" value="{{memberGroup.id}}"> {{memberGroup.name}}<br/>
+                {% endfor %}
+
+                <input type="submit">
+            </form>
+        </div>
 
     </div>
 {% endblock %}

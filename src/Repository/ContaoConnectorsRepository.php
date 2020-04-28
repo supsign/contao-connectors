@@ -4,7 +4,7 @@ namespace Supsign\ContaoConnectorsBundle\Repository;
 
 use Doctrine\ORM\EntityRepository;
 
-class AutoSyncRepository extends EntityRepository
+class ConnectorsRepository extends EntityRepository
 {
     public function findAll(array $orderBy = [])
     {

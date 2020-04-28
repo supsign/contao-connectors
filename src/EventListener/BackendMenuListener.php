@@ -2,7 +2,6 @@
 
 namespace Supsign\ContaoConnectorsBundle\EventListener;
 
-// use Supsign\ContaoConnectorsBundle\Controller\BackendController;
 use Contao\CoreBundle\Event\MenuEvent;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\RouterInterface;
@@ -27,26 +26,25 @@ class BackendMenuListener
             return;
 
         if (!$tree->getChild('supsign') ) {
-            $node = $factory
-                ->createItem('supsign')
-                    ->setUri('/')
-                    ->setLabel('Supisgn')
-                    ->setLinkAttribute('class', 'group-system')
-                    ->setLinkAttribute('onclick', "return AjaxRequest.toggleNavigation(this, 'supsign', '/')")
-                    ->setChildrenAttribute('id', 'supsign')
-                    ->setExtra('translation_domain', 'contao_default');
+	        $node = $factory
+	            ->createItem('supsign')
+		            ->setUri('/')
+		            ->setLabel('MSC.supisgn')
+		            ->setLinkAttribute('class', 'group-system')
+		            ->setLinkAttribute('onclick', "return AjaxRequest.toggleNavigation(this, 'supsign', '/')")
+		            ->setChildrenAttribute('id', 'supsign')
+		            ->setExtra('translation_domain', 'contao_default');
 
-            $contentNode = $tree->addChild($node);
-        }
+	        $contentNode = $tree->addChild($node);
+    	}
 
         $menuItem = $factory
-            ->createItem('contao-connectors')
-                // ->setUri($this->router->generate(BackendController::class) )
-                ->setUri($this->router->generate('supsign.test') )
-                ->setLabel('test label')
-                ->setLinkAttribute('title', 'test title')
-                ->setCurrent($this->requestStack->getCurrentRequest()->get('_backend_module') === 'contao-connectors')
-                ->setExtra('translation_domain', 'contao_default');
+            ->createItem('connectors')
+	            ->setUri($this->router->generate('supsign.Connectors') )
+	            ->setLabel('MSC.ConnectorsName')
+	            ->setLinkAttribute('title', 'MSC.ConnectorsTitle')														//	translation geht hier wohl nicht?
+	            ->setCurrent($this->requestStack->getCurrentRequest()->get('_backend_module') === 'connectors')
+	            ->setExtra('translation_domain', 'contao_default');
 
         $contentNode->addChild($menuItem);
     }

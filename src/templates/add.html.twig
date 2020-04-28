@@ -15,17 +15,18 @@
 
         <div>
             <form method="post" action="">
+            	Protokoll
             	<select>
             		{% for ftpProtocols in ftpProtocol %}
             			<option>{{ftpProtocol.title}}</option>
             		{% endfor %}
-            	</select>
-            	<input type="text" name="Name"/><br/>
-            	<input type="text" name="Beschreibung"/><br/>
-            	<input type="text" name="Server"/><br/>
-            	<input type="text" name="Port"/><br/>
-            	<input type="text" name="User"/><br/>
-            	<input type="text" name="Password"/><br/>
+            	</select><br/>
+            	Name<input type="text" name="name"/><br/>
+            	Beschreibung<input type="text" name="beschreibung"/><br/>
+            	Server<input type="text" name="server"/><br/>
+            	Port<input type="text" name="port"/><br/>
+            	User<input type="text" name="user"/><br/>
+            	Password<input type="text" name="password"/><br/>
             </form>
         </div>
 

@@ -9,11 +9,14 @@ use Contao\MemberModel;
 use Contao\MemberGroupModel;
 
 /**
- * @Route("/contao", defaults={
- *     "_scope" = "backend",
- *     "_token_check" = false,
- *     "_backend_module" = "connectors-bundle"
- * })
+ * @Route("/contao/test-route",
+ *     name=BackendController::class,
+ *     defaults={
+ *         "_scope" = "backend",
+ *         "_token_check" = true,
+ *         "_backend_module" = "connectors-bundle"
+ *     }
+ * )
  */
 class BackendController extends AbstractController
 {

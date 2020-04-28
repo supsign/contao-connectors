@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Supsign\ContaoConnectorsBundle\Entity\FtpData AS FtpData;
 use Supsign\ContaoConnectorsBundle\Entity\FtpProtocols AS FtpProtocols;
+use Supsign\ContaoConnectorsBundle\Repository\ConnectorsRepository as ConnectorsRepository;
 
 /**
  * @Route("/contao", defaults={
@@ -52,13 +53,11 @@ class BackendController extends AbstractController
     public function edit()
     {
 
-        // $test = FtpProtocols::findAll();
+        $test = ConnectorsRepository::findAll();
 
         var_dump(
-            class_exists('FtpProtocols'),
-            class_exists('FtpProtocolsModel')
+            $test
         );
-
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])

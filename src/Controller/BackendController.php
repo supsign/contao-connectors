@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Supsign\ContaoConnectorsBundle\Entity\FtpData;
 use Supsign\ContaoConnectorsBundle\Entity\FtpProtocols;
-use Supsign\ContaoConnectorsBundle\Repository\ConnectorsRepository;
+use Supsign\ContaoConnectorsBundle\Repository\ConnectorsRepository AS PleaseWork;
 
 /**
  * @Route("/contao", defaults={
@@ -53,7 +53,7 @@ class BackendController extends AbstractController
     public function edit()
     {
 
-        $fuckthis = new ConnectorsRepository;
+        $fuckthis = new PleaseWork;
 
 
         // $test = ConnectorsRepository::findAll();

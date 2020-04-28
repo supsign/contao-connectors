@@ -53,10 +53,14 @@ class BackendController extends AbstractController
     public function edit()
     {
 
-        $test = ConnectorsRepository::findAll();
+        $fuckthis = Supsign\ContaoConnectorsBundle\Repository\ConnectorsRepository;
+
+
+        // $test = ConnectorsRepository::findAll();
 
         var_dump(
-            $test
+            $fuckthis,
+            $fuckthis::findAll()
         );
 
         return new Response(

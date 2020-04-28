@@ -17,12 +17,17 @@ use Contao\MemberGroupModel;
  */
 class BackendController extends AbstractController
 {
+    private $twig;
+    
+    public function __construct(TwigEnvironment $twig)
+    {
+        $this->twig = $twig;
+    }
+
     public function __invoke()
     {
-        $data = [];
-
         return new Response(
-            $this->get('twig')->render('default.html.twig', $data)
+            $this->get('twig')->render('default.html.twig', [])
         );
     }
 }

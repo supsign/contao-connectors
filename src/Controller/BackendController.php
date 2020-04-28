@@ -47,9 +47,11 @@ class BackendController extends AbstractController
     public function edit()
     {
 
-        $test = FtpProtocols::findAll();
+        // $test = FtpProtocols::findAll();
 
-        var_dump($test);
+        var_dump(
+            class_exists('FtpProtocols', 'FtpProtocolsModel')
+        );
 
 
         return new Response(

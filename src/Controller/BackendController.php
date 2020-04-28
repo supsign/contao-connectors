@@ -30,7 +30,18 @@ class BackendController extends AbstractController
     public function __invoke()
     {
         return new Response(
-            $this->get('twig')->render('default.html.twig', [])
+            $this->get('twig')->render('@ContaoConnectorsBundle/default.html.twig', [])
         );
     }
+
+    /**
+     * @Route("/connectors-bundle", name="supsign.test")
+     */
+
+    public function default()
+    {
+        return new Response(
+            this->get('twig')->render('@ContaoConnectorsBundle/default.html.twig', [])
+        );
+    } 
 }

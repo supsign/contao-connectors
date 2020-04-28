@@ -30,7 +30,7 @@ class BackendMenuListener
             $node = $factory
                 ->createItem('supsign')
                     ->setUri('/')
-                    ->setLabel('MSC.supisgn')
+                    ->setLabel('Supisgn')
                     ->setLinkAttribute('class', 'group-system')
                     ->setLinkAttribute('onclick', "return AjaxRequest.toggleNavigation(this, 'supsign', '/')")
                     ->setChildrenAttribute('id', 'supsign')
@@ -41,9 +41,10 @@ class BackendMenuListener
 
         $menuItem = $factory
             ->createItem('contao-connectors')
-                ->setUri($this->router->generate(BackendController::class) )
-                ->setLabel('MSC.ftpConnectionsName')
-                ->setLinkAttribute('title', 'MSC.ftpConnectionsTitle')
+                // ->setUri($this->router->generate(BackendController::class) )
+                ->setUri($this->router->generate('supsign.test') )
+                ->setLabel('test label')
+                ->setLinkAttribute('title', 'test title')
                 ->setCurrent($this->requestStack->getCurrentRequest()->get('_backend_module') === 'contao-connectors')
                 ->setExtra('translation_domain', 'contao_default');
 

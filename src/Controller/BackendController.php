@@ -37,7 +37,6 @@ class BackendController extends AbstractController
 
     public function add()
     {
-
         $data = ['ftpProtocols' => FtpProtocolsModel::findAll()];
 
         return new Response(
@@ -51,14 +50,7 @@ class BackendController extends AbstractController
 
     public function edit()
     {
-
-        $ftpProtocols = FtpProtocolsModel::findAll();
-
-        foreach ($ftpProtocols AS $ftpProtocol)
-            var_dump(
-                $ftpProtocol,
-                $ftpProtocol->title
-            );
+        $data = ['ftpProtocols' => FtpProtocolsModel::findAll()];
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])
@@ -72,15 +64,9 @@ class BackendController extends AbstractController
     public function target()
     {
 
-        var_dump('target', $_POST);
+        var_dump('target', );
 
         $ftpProtocols = FtpProtocolsModel::findAll();
-
-        foreach ($ftpProtocols AS $ftpProtocol)
-            var_dump(
-                $ftpProtocol,
-                $ftpProtocol->title
-            );
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])

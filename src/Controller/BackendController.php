@@ -35,13 +35,8 @@ class BackendController extends AbstractController
 
     public function add()
     {
-        $ftp  = array('title' => 'FTP');
-        $sftp = array('title' => 'SFTP');
-
-        $data = ['ftpProtocols' => array($ftp, $sftp)];
-
         return new Response(
-            $this->get('twig')->render('@ContaoConnectors/add.html.twig', $data)
+            $this->get('twig')->render('@ContaoConnectors/add.html.twig', [])
         );
     }
 
@@ -56,9 +51,13 @@ class BackendController extends AbstractController
 
         var_dump($test);
 
+        var_dump(
+            method_exists($test, 'findByPk'),
+            method_exists($test, 'findAll')
+        );
 
-        var_dump($test::findByPk(2) );
-        
+        // var_dump($test::findByPk(2) );
+
         // var_dump($test::findAll() );
 
         return new Response(

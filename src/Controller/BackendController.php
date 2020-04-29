@@ -5,8 +5,10 @@ namespace Supsign\ContaoConnectorsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
-use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
+// use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
+// use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
+
+namespace Supsign\ContaoConnectorsBundle\TestClass;
 
 /**
  * @Route("/contao", defaults={
@@ -57,7 +59,7 @@ class BackendController extends AbstractController
 
         // var_dump($test->findByPk(2) );
 
-        var_dump(FtpProtocolsModel::findAll() );
+        var_dump(TestClass::test() );
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])

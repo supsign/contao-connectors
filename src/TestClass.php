@@ -2,8 +2,13 @@
 
 namespace Supsign\ContaoConnectorsBundle;
 
-use Supsign\ContaoConnectorsBundle\Repository\ConnectorsRepository;
+// use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
 
-class TestClass extends ConnectorsRepository {
 
+class TestClass {
+
+
+	static function test() {
+		var_dump('test');
+	}
 }

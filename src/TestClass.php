@@ -2,10 +2,8 @@
 
 namespace Supsign\ContaoConnectorsBundle;
 
-class TestClass {
+use Supsign\ContaoConnectorsBundle\Repository\ConnectorsRepository;
 
+class TestClass extends ConnectorsRepository {
 
-	public function __construct() {
-		var_dump('TestClass');
-	}
 }

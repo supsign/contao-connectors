@@ -56,7 +56,10 @@ class BackendController extends AbstractController
 
         var_dump($test);
 
-        var_dump($test::findAll() );
+
+        var_dump($test::findByPk(2) );
+        
+        // var_dump($test::findAll() );
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])

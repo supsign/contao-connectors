@@ -5,8 +5,8 @@ namespace Supsign\ContaoConnectorsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-// use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
-// use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
+use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
+use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
 
 use Supsign\ContaoConnectorsBundle\TestClass;
 
@@ -37,8 +37,11 @@ class BackendController extends AbstractController
 
     public function add()
     {
+
+        $data = ['ftpProtocols' => FtpProtocolsModel::findAll()];
+
         return new Response(
-            $this->get('twig')->render('@ContaoConnectors/add.html.twig', [])
+            $this->get('twig')->render('@ContaoConnectors/add.html.twig', $data)
         );
     }
 

@@ -2,10 +2,10 @@
 
 namespace Supsign\ContaoConnectorsBundle;
 
-// use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
+use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
 
 
-class TestClass {
+class TestClass extends FtpProtocolsModel {
 
 
 	static function test() {

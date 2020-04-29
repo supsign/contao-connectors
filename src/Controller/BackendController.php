@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 // use Supsign\ContaoConnectorsBundle\Entity\FtpData;
 // use Supsign\ContaoConnectorsBundle\Entity\FtpProtocols;
 // use Supsign\ContaoConnectorsBundle\Repository\ConnectorsRepository;
-use Supsign\ContaoConnectorsBundle\TestClass;
+use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
 
 /**
  * @Route("/contao", defaults={
@@ -54,7 +54,7 @@ class BackendController extends AbstractController
     public function edit()
     {
 
-        $test = new TestClass;
+        $test = new FtpDataModel;
 
         var_dump($test);
 

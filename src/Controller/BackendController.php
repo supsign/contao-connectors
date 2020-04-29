@@ -54,9 +54,11 @@ class BackendController extends AbstractController
     public function edit()
     {
 
-        $test = new FtpDataModel;
+        $test = new FtpProtocolsModel;
 
         var_dump($test);
+
+        var_dump($test::findAll() );
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])

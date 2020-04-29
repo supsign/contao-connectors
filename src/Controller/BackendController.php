@@ -64,4 +64,26 @@ class BackendController extends AbstractController
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])
         );
     }
+
+    /**
+     * @Route("/ftp-connections/target", name="supsign.connectors.target")
+     */
+
+    public function target()
+    {
+
+        var_dump('target');
+
+        $ftpProtocols = FtpProtocolsModel::findAll();
+
+        foreach ($ftpProtocols AS $ftpProtocol)
+            var_dump(
+                $ftpProtocol,
+                $ftpProtocol->title
+            );
+
+        return new Response(
+            $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])
+        );
+    }
 }

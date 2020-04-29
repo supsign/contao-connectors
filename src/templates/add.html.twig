@@ -14,7 +14,7 @@
     <div class="tl_listing_container">
 
         <div>
-            <form method="post" action="">
+            <form method="post" action="contao/ftp-connections/target">
             	Protokoll
             	<select>
             		{% for ftpProtocol in ftpProtocols %}
@@ -27,6 +27,8 @@
             	Port<input type="text" name="port"/><br/>
             	User<input type="text" name="user"/><br/>
             	Password<input type="text" name="password"/><br/>
+
+            	<input type="submit">
             </form>
         </div>
 

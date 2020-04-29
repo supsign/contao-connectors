@@ -56,9 +56,9 @@ class BackendController extends AbstractController
             method_exists($test, 'findAll')
         );
 
-        // var_dump($test::findByPk(2) );
+        var_dump($test->findByPk(2) );
 
-        // var_dump($test::findAll() );
+        var_dump(FtpProtocolsModel::findAll() );
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])

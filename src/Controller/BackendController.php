@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 // use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
 // use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
 
-namespace Supsign\ContaoConnectorsBundle\TestClass;
+use Supsign\ContaoConnectorsBundle\TestClass;
 
 /**
  * @Route("/contao", defaults={

@@ -3,6 +3,7 @@
 namespace Supsign\ContaoConnectorsBundle\Model;
 
 use Contao\Model;
+use Supsign\ContaoConnectorsBundle\Entity\FtpProtocols;
 
 /**
  * add properties for IDE support

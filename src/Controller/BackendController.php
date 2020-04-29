@@ -5,10 +5,8 @@ namespace Supsign\ContaoConnectorsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-// use Supsign\ContaoConnectorsBundle\Entity\FtpData;
-// use Supsign\ContaoConnectorsBundle\Entity\FtpProtocols;
-// use Supsign\ContaoConnectorsBundle\Repository\ConnectorsRepository;
 use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
+use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
 
 /**
  * @Route("/contao", defaults={

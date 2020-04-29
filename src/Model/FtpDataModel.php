@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Model;
+namespace Supsign\ContaoConnectorsBundle\Model;
 
 use Contao\Model;
 

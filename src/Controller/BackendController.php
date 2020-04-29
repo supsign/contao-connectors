@@ -72,7 +72,7 @@ class BackendController extends AbstractController
     public function target()
     {
 
-        var_dump('target');
+        var_dump('target', $_POST);
 
         $ftpProtocols = FtpProtocolsModel::findAll();
 

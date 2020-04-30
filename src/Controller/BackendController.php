@@ -63,12 +63,8 @@ class BackendController extends AbstractController
 
     public function target()
     {
-        $test1 = \Input::get('name');
-        $test2 = $this->Input;
-
-
         var_dump(
-            $test1, $test2
+            $_POST
         );
 
         $ftpProtocols = FtpProtocolsModel::findAll();

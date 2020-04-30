@@ -77,9 +77,10 @@ class BackendController extends AbstractController
 
     public function target()
     {
-        $entityManager = EntityManager::create();
 
-        $entry = (new FtpData)
+        $entry = new FtpDataModel;
+
+        $entry
             ->setTitle($_POST['title'])
             ->setDescription($_POST['description'])
             ->setServer($_POST['server'])
@@ -87,9 +88,23 @@ class BackendController extends AbstractController
             ->setUser($_POST['user'])
             ->setPassword($_POST['password']);
 
-        $entityManager->persist($entry);
 
-        // $entry->save();
+
+        var_dump($entry);
+
+        // $entityManager = EntityManager::create();
+
+        // $entry = (new FtpData)
+        //     ->setTitle($_POST['title'])
+        //     ->setDescription($_POST['description'])
+        //     ->setServer($_POST['server'])
+        //     ->setPort($_POST['port'])
+        //     ->setUser($_POST['user'])
+        //     ->setPassword($_POST['password']);
+
+        // $entityManager->persist($entry);
+
+        $entry->save();
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])

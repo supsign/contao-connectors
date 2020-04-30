@@ -93,7 +93,7 @@ class BackendController extends AbstractController
         $entry->port = $_POST['port'];
         $entry->user = $_POST['user'];
         $entry->password = $_POST['password'];
-        $entry->tstamp = now();
+        $entry->tstamp = time();
 
         $entry->save();
 

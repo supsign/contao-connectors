@@ -22,12 +22,12 @@
             			<option value="{{ftpProtocol.id}}">{{ftpProtocol.title}}</option>
             		{% endfor %}
             	</select><br/>
-            	Name<input type="text" name="title"/><br/>
-            	Beschreibung<input type="text" name="description"/><br/>
-            	Server<input type="text" name="server"/><br/>
-            	Port<input type="text" name="port"/><br/>
-            	User<input type="text" name="user"/><br/>
-            	Password<input type="text" name="password"/><br/>
+            	Name<input type="text" value="{{ftpEntry.title}}" name="title"/><br/>
+            	Beschreibung<input type="text" value="{{ftpEntry.description}}" name="description"/><br/>
+            	Server<input type="text" value="{{ftpEntry.server}}" name="server"/><br/>
+            	Port<input type="text" value="{{ftpEntry.port}}" name="port"/><br/>
+            	User<input type="text" value="{{ftpEntry.user}}" name="user"/><br/>
+            	Password<input type="text" value="{{ftpEntry.password}}" name="password"/><br/>
             	<br/>
             	<input type="submit">
             </form>

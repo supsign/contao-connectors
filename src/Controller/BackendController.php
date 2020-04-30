@@ -50,14 +50,10 @@ class BackendController extends AbstractController
 
     public function edit()
     {
-        $data = ['ftpProtocols' => FtpProtocolsModel::findAll()];
-
-        if (!empty($_GET) )
-            var_dump($_GET);
-
-        $entry = FtpDataModel::findByPk($_GET['id']);
-
-        var_dump($entry);
+        $data = array(
+            'ftpProtocols' => FtpProtocolsModel::findAll(),
+            'ftpEntry' => FtpDataModel::findByPk($_GET['id'])
+        );
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])

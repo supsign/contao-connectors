@@ -8,8 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
 use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
 use Supsign\ContaoConnectorsBundle\Entity\FtpData;
-
-use Supsign\ContaoConnectorsBundle\TestClass;
+use \Doctrine\ORM\EntityManager;
 
 /**
  * @Route("/contao", defaults={
@@ -78,21 +77,19 @@ class BackendController extends AbstractController
 
     public function target()
     {
-        $entry = new FtpData();
+        $entityManager = EntityManager::create();
 
-        var_dump($entry);
-
-        $entry
+        $entry = (new FtpData)
             ->setTitle($_POST['title'])
             ->setDescription($_POST['description'])
             ->setServer($_POST['server'])
             ->setPort($_POST['port'])
             ->setUser($_POST['user'])
             ->setPassword($_POST['password']);
-            
-        var_dump($entry);
 
-        $entry->save();
+        $entityManager->persist($entry);
+
+        // $entry->save();
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])

@@ -82,15 +82,14 @@ class BackendController extends AbstractController
 
         var_dump($entry);
 
-        // $entry->setName($_POST['name']);
-
-        $entry->name = $_POST['name'];
-        $entry->description = $_POST['description'];
-        $entry->server = $_POST['server'];
-        $entry->port = $_POST['port'];
-        $entry->user = $_POST['user'];
-        $entry->password = $_POST['password'];
-
+        $entry
+            ->setTitle($_POST['title'])
+            ->setDescription($_POST['description'])
+            ->setServer($_POST['server'])
+            ->setPort($_POST['port'])
+            ->setUser($_POST['user'])
+            ->setPassword($_POST['password']);
+            
         var_dump($entry);
 
         $entry->save();

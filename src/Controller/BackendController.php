@@ -77,35 +77,16 @@ class BackendController extends AbstractController
 
     public function target()
     {
-
         $entry = new FtpDataModel;
 
+        $entry->ftpProtocolId = $_POST['protocol_id'];
         $entry->title = $_POST['title'];
-
-
-        // $entry
-        //     ->setTitle($_POST['title'])
-        //     ->setDescription($_POST['description'])
-        //     ->setServer($_POST['server'])
-        //     ->setPort($_POST['port'])
-        //     ->setUser($_POST['user'])
-        //     ->setPassword($_POST['password']);
-
-
-
-        var_dump($entry);
-
-        // $entityManager = EntityManager::create();
-
-        // $entry = (new FtpData)
-        //     ->setTitle($_POST['title'])
-        //     ->setDescription($_POST['description'])
-        //     ->setServer($_POST['server'])
-        //     ->setPort($_POST['port'])
-        //     ->setUser($_POST['user'])
-        //     ->setPassword($_POST['password']);
-
-        // $entityManager->persist($entry);
+        $entry->description = $_POST['description'];
+        $entry->server = $_POST['server'];
+        $entry->port = $_POST['port'];
+        $entry->user = $_POST['user'];
+        $entry->password = $_POST['password'];
+        $entry->server = $_POST['server'];
 
         $entry->save();
 

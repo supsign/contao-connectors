@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
 use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
-Supsign\ContaoConnectorsBundle\Entity\FtpData;
+use Supsign\ContaoConnectorsBundle\Entity\FtpData;
 
 use Supsign\ContaoConnectorsBundle\TestClass;
 

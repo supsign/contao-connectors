@@ -64,9 +64,10 @@ class BackendController extends AbstractController
     public function list()
     {
 
+        $data = ['ftpData' => FtpDataModel::findAll()];
 
         return new Response(
-            $this->get('twig')->render('@ContaoConnectors/list.html.twig', [])
+            $this->get('twig')->render('@ContaoConnectors/list.html.twig', $data)
         );
     }
 
@@ -78,12 +79,16 @@ class BackendController extends AbstractController
     {
         $entry = new FtpDataModel();
 
+        var_dump($entry);
+
         $enty->name = $_POST['name'];
         $enty->description = $_POST['description'];
         $enty->server = $_POST['server'];
         $enty->port = $_POST['port'];
         $enty->user = $_POST['user'];
         $enty->password = $_POST['password'];
+
+        var_dump($entry);
 
         $entry->save();
 

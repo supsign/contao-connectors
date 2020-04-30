@@ -67,8 +67,6 @@ class BackendController extends AbstractController
             $_POST
         );
 
-        $ftpProtocols = FtpProtocolsModel::findAll();
-
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])
         );

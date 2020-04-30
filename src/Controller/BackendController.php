@@ -75,10 +75,10 @@ class BackendController extends AbstractController
     }
 
     /**
-     * @Route("/ftp-connections/target", name="supsign.connectors.target")
+     * @Route("/ftp-connections/save", name="supsign.connectors.save")
      */
 
-    public function target()
+    public function save()
     {
         if (!empty($_GET['id']) )
             $entry = FtpDataModel::findByPk($_GET['id']);

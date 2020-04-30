@@ -56,7 +56,7 @@ class BackendController extends AbstractController
         );
 
         return new Response(
-            $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])
+            $this->get('twig')->render('@ContaoConnectors/edit.html.twig', $data)
         );
     }
 

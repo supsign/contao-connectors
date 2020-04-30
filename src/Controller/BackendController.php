@@ -7,6 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
 use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
+Supsign\ContaoConnectorsBundle\Entity\FtpData;
 
 use Supsign\ContaoConnectorsBundle\TestClass;
 
@@ -77,9 +78,11 @@ class BackendController extends AbstractController
 
     public function target()
     {
-        $entry = new FtpDataModel();
+        $entry = new FtpData();
 
         var_dump($entry);
+
+        // $entry->setName($_POST['name']);
 
         $enty->name = $_POST['name'];
         $enty->description = $_POST['description'];

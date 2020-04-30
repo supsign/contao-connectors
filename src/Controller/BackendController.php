@@ -96,8 +96,10 @@ class BackendController extends AbstractController
 
         $entry->save();
 
+        $data = ['ftpData' => FtpDataModel::findAll()];
+
         return new Response(
-            $this->get('twig')->render('@ContaoConnectors/list.html.twig', [])
+            $this->get('twig')->render('@ContaoConnectors/list.html.twig', $data)
         );
     }
 }

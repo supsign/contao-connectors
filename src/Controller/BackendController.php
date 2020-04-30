@@ -80,7 +80,10 @@ class BackendController extends AbstractController
 
     public function target()
     {
-        $entry = new FtpDataModel;
+        if (!empty($_GET['id']) )
+            $entry = FtpDataModel::findByPk($_GET['id']);
+        else
+            $entry = new FtpDataModel;
 
         $entry->ftpProtocolId = $_POST['protocol_id'];
         $entry->title = $_POST['title'];

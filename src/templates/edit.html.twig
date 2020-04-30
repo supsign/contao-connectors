@@ -15,7 +15,7 @@
     	<a href="contao/ftp-connections">zurück</a>
 
         <div>
-            <form method="post" action="contao/ftp-connections/target">
+            <form method="post" action="contao/ftp-connections/target?id={{ftpEntry.id}}">
             	Protokoll
             	<select name="protocol_id">
             		{% for ftpProtocol in ftpProtocols %}

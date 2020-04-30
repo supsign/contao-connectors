@@ -76,9 +76,16 @@ class BackendController extends AbstractController
 
     public function target()
     {
-        var_dump(
-            $_POST
-        );
+        $entry = new FtpDataModel();
+
+        $enty->name = $_POST['name'];
+        $enty->description = $_POST['description'];
+        $enty->server = $_POST['server'];
+        $enty->port = $_POST['port'];
+        $enty->user = $_POST['user'];
+        $enty->password = $_POST['password'];
+
+        $entry->save();
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', [])

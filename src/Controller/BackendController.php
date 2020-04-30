@@ -78,15 +78,18 @@ class BackendController extends AbstractController
     public function target()
     {
 
-        $entry = new FtpDataModel;
+        $entry = new FtpDataModel::create();
 
-        $entry
-            ->setTitle($_POST['title'])
-            ->setDescription($_POST['description'])
-            ->setServer($_POST['server'])
-            ->setPort($_POST['port'])
-            ->setUser($_POST['user'])
-            ->setPassword($_POST['password']);
+
+
+
+        // $entry
+        //     ->setTitle($_POST['title'])
+        //     ->setDescription($_POST['description'])
+        //     ->setServer($_POST['server'])
+        //     ->setPort($_POST['port'])
+        //     ->setUser($_POST['user'])
+        //     ->setPassword($_POST['password']);
 
 
 

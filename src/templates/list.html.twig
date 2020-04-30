@@ -12,11 +12,11 @@
 
 {% block main %}
     <div class="tl_listing_container">
-    	<a href="contao/ftp-connections">zurück</a>
+    	<a href="contao/ftp-connections">zurück</a><br/><br/>
 
             	
 		{% for ftpConnection in ftpData %}
-			{{ftpConnection.title}}<br/>
+			<a href="contao/ftp-connections/list?id={{ftpConnection.id}}">{{ftpConnection.title}}</a><br/>
 			{{ftpConnection.description}}<br/>
 			<br/><br/>
 		{% endfor %}

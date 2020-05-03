@@ -24,10 +24,11 @@ class BackendController extends AbstractController
      * @Route("/ftp-connections", name="supsign.connectors")
      */
 
-    public function default()
+    public function
+    default()
     {
         return new Response(
-            $this->get('twig')->render('@ContaoConnectors/default.html.twig', [])
+            $this->get('twig')->render('@ContaoConnectors/index.html.twig', [])
         );
     }
 
@@ -80,7 +81,7 @@ class BackendController extends AbstractController
 
     public function save()
     {
-        if (!empty($_GET['id']) )
+        if (!empty($_GET['id']))
             $entry = FtpDataModel::findByPk($_GET['id']);
         else
             $entry = new FtpDataModel;

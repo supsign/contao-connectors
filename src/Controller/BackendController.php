@@ -34,6 +34,22 @@ class BackendController extends AbstractController
     }
 
     /**
+     * @Route("/ftp-connections/delete", name="supsign.connectors.delete")
+     */
+
+    public function delete()
+    {
+        if (!empty($_GET['id']) )
+            FtpDataModel::findByPk($_GET['id'])->delete();
+
+        $data = ['ftpData' => FtpDataModel::findAll()];
+
+        return new Response(
+            $this->get('twig')->render('@ContaoConnectors/index.html.twig', $data)
+        );
+    }
+
+    /**
      * @Route("/ftp-connections/edit", name="supsign.connectors.edit")
      */
 
@@ -57,7 +73,7 @@ class BackendController extends AbstractController
 
     public function save()
     {
-        if (!empty($_GET['id']))
+        if (!empty($_GET['id']) )
             $entry = FtpDataModel::findByPk($_GET['id']);
         else
             $entry = new FtpDataModel;
@@ -68,9 +84,9 @@ class BackendController extends AbstractController
             if (empty($value) )
                 throw new \Exception(__FILE__.':'.__LINE__.' - no value for "'.$key.'"', 1);
 
-            //  data validation
-
-            switch ($key) {                
+            switch ($key) {
+                //  data validation
+                    
                 default:
                     $entry->{$key} = $value;
                     break;

@@ -19,7 +19,9 @@
     	<div>
 			{% for ftpConnection in ftpData %}
 				<a href="contao/ftp-connections/edit?id={{ftpConnection.id}}"><strong>{{ftpConnection.title}}</strong></a><br/>
-				{{ftpConnection.description}}<br/><br/>
+				{{ftpConnection.description}}<br/>
+				<button><a href="contao/ftp-connections/delete?id={{ftpConnection.id}}">löschen</a><br/></button>
+				<br/><br/>
 			{% endfor %}
     	</div>
     </div>

@@ -62,22 +62,11 @@ class BackendController extends AbstractController
         else
             $entry = new FtpDataModel;
 
-        var_dump($_POST);
+        // var_dump($_POST);
 
-        foreach ($_POST AS $key => $value) {
+        foreach ($_POST AS $key => $value)
+           $entry->{$key} = $value;
 
-
-
-        }
-
-
-        $entry->ftpProtocolId = $_POST['ftpProtocolId'];
-        $entry->title = $_POST['title'];
-        $entry->description = $_POST['description'];
-        $entry->server = $_POST['server'];
-        $entry->port = $_POST['port'];
-        $entry->user = $_POST['user'];
-        $entry->password = $_POST['password'];
         $entry->tstamp = time();
 
         $entry->save();

@@ -5,10 +5,10 @@ namespace Supsign\ContaoConnectorsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use \Doctrine\ORM\EntityManager;
 use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
 use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
-use Supsign\ContaoConnectorsBundle\Entity\FtpData;
-use \Doctrine\ORM\EntityManager;
+use Supsign\ContaoConnectorsBundle\FtpConnection;
 
 /**
  * @Route("/contao", defaults={
@@ -86,7 +86,7 @@ class BackendController extends AbstractController
 
             switch ($key) {
                 //  data validation
-                    
+
                 default:
                     $entry->{$key} = $value;
                     break;
@@ -103,4 +103,19 @@ class BackendController extends AbstractController
             $this->get('twig')->render('@ContaoConnectors/index.html.twig', $data)
         );
     }
+
+    /**
+     * @Route("/ftp-connections/test", name="supsign.connectors.test")
+     */
+
+    public function test()
+    {
+
+        new FtpConnection;
+
+
+        return new Response(
+            $this->get('twig')->render('@ContaoConnectors/test.html.twig', [])
+        );
+    }    
 }

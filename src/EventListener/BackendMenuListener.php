@@ -32,8 +32,7 @@ class BackendMenuListener
 		            ->setLabel('Supsign')
 		            ->setLinkAttribute('class', 'group-system')
 		            ->setLinkAttribute('onclick', "return AjaxRequest.toggleNavigation(this, 'supsign', '/')")
-		            ->setChildrenAttribute('id', 'supsign')
-		            ->setExtra('translation_domain', 'contao_default');
+		            ->setChildrenAttribute('id', 'supsign');
 
 	        $contentNode = $tree->addChild($node);
     	}
@@ -43,8 +42,7 @@ class BackendMenuListener
 	            ->setUri($this->router->generate('supsign.connectors') )
 	            ->setLabel('FTP Verbindungen')
 	            ->setLinkAttribute('title', 'FTP Verbindungen verwalten')
-	            ->setCurrent($this->requestStack->getCurrentRequest()->get('_backend_module') === 'connectors')
-	            ->setExtra('translation_domain', 'contao_default');
+	            ->setCurrent($this->requestStack->getCurrentRequest()->get('_backend_module') === 'connectors');
 
         $contentNode->addChild($menuItem);
     }

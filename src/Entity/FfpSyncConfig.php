@@ -30,12 +30,6 @@ class FfpSyncConfig
      * @var string
      * @ORM\Column(type="string", options={"default" : ""})
      */
-    protected ;
-
-    /**
-     * @var string
-     * @ORM\Column(type="string", options={"default" : ""})
-     */
     protected $sourcePath;
 
     /**

@@ -7,7 +7,7 @@ use \Doctrine\ORM\Mapping as ORM;
  * Class Log
  *
  * @ORM\Entity
- * @ORM\Table(name="tl_ftp_protocls")
+ * @ORM\Table(name="tl_ftp_protocols")
  * @ORM\Entity(repositoryClass="Supsign\ContaoConnectorsBundle\Repository\ConnectorsRepository")
  */
 class FtpProtocols

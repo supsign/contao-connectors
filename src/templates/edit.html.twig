@@ -19,7 +19,7 @@
         <div>
             <form method="post" action="contao/ftp-connections/save?id={{ftpEntry.id}}">
             	Protokoll
-            	<select name="protocol_id">
+            	<select name="ftpProtocolId">
             		{% for ftpProtocol in ftpProtocols %}
             			<option {% if ftpEntry.ftpProtocolId == ftpProtocol.id %} selected {% endif %} value="{{ftpProtocol.id}}">{{ftpProtocol.title}}</option>
             		{% endfor %}

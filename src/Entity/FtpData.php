@@ -42,7 +42,7 @@ class FtpData
      * @var int
      * @ORM\Column(type="integer")
      */
-    protected $ftpProtocolId;
+    protected $ftp_Protocol_id;
 
     /**
      * @var string
@@ -169,7 +169,7 @@ class FtpData
      */ 
     public function getFtpProtocolId(): int
     {
-        return $this->ftpProtocolId;
+        return $this->ftp_Protocol_id;
     }
 
     /**
@@ -181,7 +181,7 @@ class FtpData
      */ 
     public function setFtpProtocolId(int $ftpProtocolId)
     {
-        $this->ftpProtocolId = $ftpProtocolId;
+        $this->ftp_Protocol_id = $ftpProtocolId;
 
         return $this;
     }

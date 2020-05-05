@@ -71,7 +71,7 @@ class BackendController extends AbstractController
         }
 
 
-        $entry->ftpProtocolId = $_POST['protocol_id'];
+        $entry->ftpProtocolId = $_POST['ftpProtocolId'];
         $entry->title = $_POST['title'];
         $entry->description = $_POST['description'];
         $entry->server = $_POST['server'];

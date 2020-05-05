@@ -24,24 +24,12 @@ class BackendController extends AbstractController
      * @Route("/ftp-connections", name="supsign.connectors")
      */
 
-    public function
-    default()
+    public function default()
     {
-        return new Response(
-            $this->get('twig')->render('@ContaoConnectors/index.html.twig', [])
-        );
-    }
-
-    /**
-     * @Route("/ftp-connections/add", name="supsign.connectors.add")
-     */
-
-    public function add()
-    {
-        $data = ['ftpProtocols' => FtpProtocolsModel::findAll()];
+        $data = ['ftpData' => FtpDataModel::findAll()];
 
         return new Response(
-            $this->get('twig')->render('@ContaoConnectors/add.html.twig', $data)
+            $this->get('twig')->render('@ContaoConnectors/index.html.twig', $data)
         );
     }
 
@@ -51,27 +39,15 @@ class BackendController extends AbstractController
 
     public function edit()
     {
+        $entry = !empty($_GET['id']) ? FtpDataModel::findByPk($_GET['id']) : new FtpDataModel;
+
         $data = array(
             'ftpProtocols' => FtpProtocolsModel::findAll(),
-            'ftpEntry' => FtpDataModel::findByPk($_GET['id'])
+            'ftpEntry' => $entry
         );
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', $data)
-        );
-    }
-
-    /**
-     * @Route("/ftp-connections/list", name="supsign.connectors.list")
-     */
-
-    public function list()
-    {
-
-        $data = ['ftpData' => FtpDataModel::findAll()];
-
-        return new Response(
-            $this->get('twig')->render('@ContaoConnectors/list.html.twig', $data)
         );
     }
 
@@ -85,6 +61,15 @@ class BackendController extends AbstractController
             $entry = FtpDataModel::findByPk($_GET['id']);
         else
             $entry = new FtpDataModel;
+
+        var_dump($_POST);
+
+        foreach ($_POST AS $key => $value) {
+
+
+
+        }
+
 
         $entry->ftpProtocolId = $_POST['protocol_id'];
         $entry->title = $_POST['title'];
@@ -100,7 +85,7 @@ class BackendController extends AbstractController
         $data = ['ftpData' => FtpDataModel::findAll()];
 
         return new Response(
-            $this->get('twig')->render('@ContaoConnectors/list.html.twig', $data)
+            $this->get('twig')->render('@ContaoConnectors/index.html.twig', $data)
         );
     }
 }

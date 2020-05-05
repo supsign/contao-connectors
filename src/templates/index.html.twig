@@ -12,8 +12,15 @@
 
 {% block main %}
     <div class="tl_listing_container">
-    <a href="contao/ftp-connections/add">Hinzufügen</a><br/>
-    <a href="contao/ftp-connections/list">Liste</a>
-
+    	<div>
+    		<button><a href="contao/ftp-connections/edit">Hinzufügen</a><br/></button>
+    	</div>
+    	<br/>
+    	<div>
+			{% for ftpConnection in ftpData %}
+				<a href="contao/ftp-connections/edit?id={{ftpConnection.id}}"><strong>{{ftpConnection.title}}</strong></a><br/>
+				{{ftpConnection.description}}<br/><br/>
+			{% endfor %}
+    	</div>
     </div>
 {% endblock %}

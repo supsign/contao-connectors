@@ -12,8 +12,10 @@
 
 {% block main %}
     <div class="tl_listing_container">
-    	<a href="contao/ftp-connections">zurück</a>
-
+        <div>
+    	   <button><a href="contao/ftp-connections">zurück</a></button>
+        </div>
+        <br/>
         <div>
             <form method="post" action="contao/ftp-connections/save?id={{ftpEntry.id}}">
             	Protokoll
@@ -32,6 +34,5 @@
             	<input type="submit">
             </form>
         </div>
-
     </div>
 {% endblock %}

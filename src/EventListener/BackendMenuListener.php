@@ -29,7 +29,7 @@ class BackendMenuListener
 	        $node = $factory
 	            ->createItem('supsign')
 		            ->setUri('/')
-		            ->setLabel('Supisgn')
+		            ->setLabel('Supsign')
 		            ->setLinkAttribute('class', 'group-system')
 		            ->setLinkAttribute('onclick', "return AjaxRequest.toggleNavigation(this, 'supsign', '/')")
 		            ->setChildrenAttribute('id', 'supsign')

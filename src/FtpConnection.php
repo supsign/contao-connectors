@@ -6,9 +6,14 @@ use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
 use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
 
 class FtpConnection {
-	private $ftpConnections = [];
+	private 
+		$ftpConnections = [],
+		$protocol = null,
+		$server = null,
+		$port = null,
+		$password = null;
 
-	function __construct() {
+	public function __construct() {
 		$this->ftpConnections = FtpDataModel::findAll();
 	}
 
@@ -24,5 +29,20 @@ class FtpConnection {
 
 	}
 
+	public function iterate() {
+		foreach ($this->ftpConnections AS $connection) {
+			$this->server 	= $connection->server;
+			$this->port   	= $connection->port;
+			$this->password = $connection->password
+
+
+			var_dump(
+				$connection->server,
+				$connection->port,
+				$connection->password
+			);
+		}
+		
+	}
 
 }

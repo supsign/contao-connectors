@@ -110,9 +110,8 @@ class BackendController extends AbstractController
 
     public function test()
     {
-        var_dump(
-            new FtpConnection
-        );
+        $con = new FtpConnection;
+        $con->iterate();
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/test.html.twig', [])

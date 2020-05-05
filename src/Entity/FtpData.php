@@ -45,6 +45,12 @@ class FtpData
     protected $ftpProtocolId;
 
     /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    protected $ffpSyncConfigId;
+
+    /**
      * @var string
      * @ORM\Column(type="string", options={"default" : ""})
      */

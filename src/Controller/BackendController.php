@@ -64,8 +64,18 @@ class BackendController extends AbstractController
 
         // var_dump($_POST);
 
-        foreach ($_POST AS $key => $value)
-           $entry->{$key} = $value;
+        foreach ($_POST AS $key => $value) {
+            if (empty($value) )
+                throw new \Exception(__FILE__.':'.__LINE__.' - no value for "'.$key.'"', 1);
+
+            //  data validation
+
+            switch ($key) {                
+                default:
+                    $entry->{$key} = $value;
+                    break;
+            }
+        }
 
         $entry->tstamp = time();
 

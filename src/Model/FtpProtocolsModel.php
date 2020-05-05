@@ -12,7 +12,7 @@ use Supsign\ContaoConnectorsBundle\Entity\FtpProtocols;
  */
 class FtpProtocolsModel extends Model
 {
-    protected static $strTable = 'tl_ftp_protocls';
+    protected static $strTable = 'tl_ftp_protocols';
 
     // if you have logic you need more often, you can implement it here
     public function setHash()

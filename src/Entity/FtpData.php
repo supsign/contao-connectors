@@ -60,7 +60,7 @@ class FtpData
 
     /**
      * One product has many features. This is the inverse side.
-     * @ORM\OneToMany(targetEntity="FfpSyncConfigs", mappedBy="ftpData")
+     * @ORM\OneToMany(targetEntity="FtpSyncConfigs", mappedBy="ftpData")
      */
     protected $ftpSyncConfig;
 

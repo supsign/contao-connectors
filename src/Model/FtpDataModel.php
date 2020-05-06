@@ -35,13 +35,7 @@ class FtpDataModel extends Model
     				$id = $key.'Id';
     				$class = 'Supsign\ContaoConnectorsBundle\Model\\'.ucfirst($key).'sModel';
 
-    				var_dump(
-    					$id, $class, $this->$id
-    				);
-
-    				$this->$key = $class::findByPk($id);
-
-    				var_dump($this->$key);
+    				$this->$key = $class::findByPk($this->$id);
     			}
 
     			return $this->$key;

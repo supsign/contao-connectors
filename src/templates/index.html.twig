@@ -65,7 +65,9 @@
           </div>
 
           <div>
-            subinfo - here
+            {% for config in ftpConnection.ftpSyncConfig %}
+              {{config.sourcePath}} - {{config.destinationPath}}
+            {% endfor %}
           </div>
 
         </li>

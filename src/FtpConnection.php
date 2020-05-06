@@ -33,8 +33,7 @@ class FtpConnection {
 		foreach ($this->ftpConnections AS $connection) {
 			$this->server 	= $connection->server;
 			$this->port   	= $connection->port;
-			$this->password = $connection->password
-
+			$this->password = $connection->password;
 
 			var_dump(
 				$connection->server,

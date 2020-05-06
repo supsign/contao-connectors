@@ -8,6 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use \Doctrine\ORM\EntityManager;
 use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
 use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
+use Supsign\ContaoConnectorsBundle\Model\FtpSyncConfigsModel;
 use Supsign\ContaoConnectorsBundle\FtpConnection;
 
 /**
@@ -69,10 +70,10 @@ class BackendController extends AbstractController
             'ftpEntry' => $entry
         );
 
-        var_dump(
-            $entry->ftpProtocol,
-            $entry->ftpSyncConfig
-        );
+        var_dump($entry->ftpSyncConfig->sourcePath);
+
+        foreach ($entry->ftpSyncConfig AS $config)
+            var_dump($config->sourcePath, $config->destinationPath);
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', $data)
@@ -122,8 +123,14 @@ class BackendController extends AbstractController
 
     public function test()
     {
-        $con = new FtpConnection;
-        $con->iterate();
+        $test = FtpSyncConfigsModel::findAll();
+
+        var_dump($test);
+
+
+
+        // $con = new FtpConnection;
+        // $con->iterate();
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/test.html.twig', [])

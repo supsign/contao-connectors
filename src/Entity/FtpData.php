@@ -53,12 +53,6 @@ class FtpData
     protected $ftpProtocol;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    protected $ftpSyncConfigId;
-
-    /**
      * One product has many features. This is the inverse side.
      * @ORM\OneToMany(targetEntity="FtpSyncConfigs", mappedBy="ftpData")
      */
@@ -87,11 +81,6 @@ class FtpData
      * @ORM\Column(type="string", options={"default" : ""})
      */
     protected $password;
-
-    public function __construct() {
-        $this->ftpProtocol = new ArrayCollection();
-        $this->ftpSyncConfig = new ArrayCollection();
-    }
 
     // Diese Funktion ist sehr hilfreich, um alle Daten als Array zu erhalten. 
     public function getData() {

@@ -27,10 +27,21 @@ class BackendController extends AbstractController
 
     public function listConnections()
     {
+        $ftpData = FtpDataModel::findAll();
+
+        foreach ($ftpData AS $ftpConnection) {
+            var_dump(
+                $ftpConnection->ftpProtocol,
+                $ftpConnection->ftpSyncConfig
+            );
+        }
+
         $data = array(
-            'ftpData' => FtpDataModel::findAll(),
+            'ftpData' => $ftpData,
             'ftpProtocols' => FtpProtocolsModel::findAll()
         );
+
+        // var_dump($ftpData);
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/index.html.twig', $data)
@@ -69,11 +80,6 @@ class BackendController extends AbstractController
             'ftpProtocols' => FtpProtocolsModel::findAll(),
             'ftpEntry' => $entry
         );
-
-        var_dump($entry->ftpSyncConfig->sourcePath);
-
-        foreach ($entry->ftpSyncConfig AS $config)
-            var_dump($config->sourcePath, $config->destinationPath);
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', $data)

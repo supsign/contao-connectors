@@ -65,6 +65,16 @@
           </div>
 
           <div>
+            Pfade<br/>
+
+            {% if ftpConnection is iterable %}
+              it is
+            {% else %}
+              it's not
+            {% endif %}
+
+            <br/><br/>
+
             {% for config in ftpConnection.ftpSyncConfig %}
               {{config.sourcePath}} - {{config.destinationPath}}
             {% endfor %}

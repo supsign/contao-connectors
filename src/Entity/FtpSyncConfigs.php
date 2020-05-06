@@ -27,6 +27,18 @@ class FtpSyncConfigs
     protected $tstamp;
 
     /**
+     * @var int
+     * @ORM\Column(type="integer")
+     */
+    protected $ftpDataId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="FtpData", inversedBy="ftpSyncConfig")
+     * @ORM\JoinColumn(name="ftpDataId", referencedColumnName="id")
+     */
+    protected $ftpData;
+
+    /**
      * @var string
      * @ORM\Column(type="string", options={"default" : ""})
      */
@@ -37,13 +49,6 @@ class FtpSyncConfigs
      * @ORM\Column(type="string", options={"default" : ""})
      */
     protected $destinationPath;
-
-    /**
-     * Many features have one product. This is the owning side.
-     * @ORM\ManyToOne(targetEntity="FtpData", inversedBy="ftpSyncConfig")
-     * @ORM\JoinColumn(name="ftpSyncConfigId", referencedColumnName="id")
-     */
-    protected $ftpData;
 
     // Diese Funktion ist sehr hilfreich, um alle Daten als Array zu erhalten. 
     public function getData() {

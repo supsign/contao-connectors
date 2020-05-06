@@ -14,8 +14,8 @@ use Contao\Model;
 class FtpDataModel extends Model
 {
     protected static $strTable = 'tl_ftp_data';
-    protected $ftpProtocol;
-    protected $ftpSyncConfig;
+    // protected $ftpProtocol;
+    // protected $ftpSyncConfig;
 
     // if you have logic you need more often, you can implement it here
     public function setHash()
@@ -23,25 +23,26 @@ class FtpDataModel extends Model
         $this->hash = md5($this->id);
     }
 
-    public function __get($key) {
-    	switch ($key) {
-    		case 'ftpProtocol':
-    		case 'ftpSyncConfig':
+    // public function __get($key) {
+    //     $class = 'Supsign\ContaoConnectorsBundle\Model\\'.ucfirst($key).'sModel';
 
-    			if (!property_exists($this, $key) )
-    				throw new \Exception('property '.$key.' doesn\'t exist', 1);
-    				
-    			if (empty($this->$key) ) {
-    				$id = $key.'Id';
-    				$class = 'Supsign\ContaoConnectorsBundle\Model\\'.ucfirst($key).'sModel';
+    // 	switch ($key) {
+    // 		case 'ftpProtocol':
+    //             $method  = 'findByPk';
+    //             $idField = $key.'Id';
+    //             break;
 
-    				$this->$key = $class::findByPk($this->$id);
-    			}
-
-    			return $this->$key;
+    // 		case 'ftpSyncConfig':
+    //             $method = 'findByFtpDataId';
+    //             $idField = 'id';
+    //             break;
     		
-    		default:
-    			return parent::__get($key);
-    	}
-    }
+    // 		default:
+    // 			return parent::__get($key);
+    // 	}
+
+    //     $this->$key = $class::$method($this->$idField);
+
+    //     return $this->$key;
+    // }
 }

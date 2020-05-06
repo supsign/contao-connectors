@@ -11,77 +11,46 @@
   <div id="tl_buttons">
     <a class="header_new" href="contao/ftp-connections/edit">Hinzuf&uuml;gen</a>
   </div>
-  <div class="tl_listing_container parent_view">
-    <div class="tl_header">
-    <table class="tl_header_table">
-      <tbody>
-        <tr>
-          <td><span class="tl_label">M&ouml;gliche Protokolle:</span> </td>
-          <td>
-            {% for ftpProtocol in ftpProtocols %}
-              {{ftpProtocol.title}}{% if loop.length != loop.index %}, {% endif %}
-            {% endfor %}
-          </td>
-        </tr>
-        <tr>
-          <td><span class="tl_label">Autor:</span> </td>
-          <td>Supsign GmbH</td>
-        </tr>
-      </tbody>
-    </table>
-    </div>
 
-    <ul>
+<div class="tl_listing_container tree_view" id="tl_listing">
+    <ul class="tl_listing tl_tree_xtnd">
+      <li class="tl_folder_top cf">
+        <div class="tl_left">
+          <label>Verbindungen</label>
+        </div>
+        <div class="tl_right">&nbsp;</div>
+      </li>
+
+
       {% for ftpConnection in ftpData %}
-        <li>
-          <div class="tl_content">
+        <li class="tl_folder cf">
+          <div class="tl_left" style="padding-left:0px">
+            <img src="system/themes/flexible/icons/pagemounts.svg" width="18" height="18" alt="">
+            <strong>{{ftpConnection.title}}</strong> - {{ftpConnection.description}}<br>
+            {{ftpConnection.user}}@{{ftpConnection.server}}:{{ftpConnection.port}}
+            </div>
+
             <div class="tl_content_right">
               <a href="contao/ftp-connections/edit?id={{ftpConnection.id}}" title="" class="edit"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Element bearbeiten"></a>
               <a href="contao/ftp-connections/delete?id={{ftpConnection.id}}" title="" class="delete" onclick="if(!confirm('Soll der Eintrag ID 107431 wirklich gel&ouml;scht werden?'))return false;Backend.getScrollOffset()"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Element löschen"></a>
             </div>
-            <div class="cte_type published">{{ftpConnection.title}}</div>
-            <div class="limit_height">
-              <h1>{{ftpConnection.description}}</h1>
-              <div class="tl_gray">
-              <ul class="attributes">
-                <li class="sibling tl_gray">
-                  <span class="title cell first">Server-Adresse:</span>
-                  <span class="value cell last">{{ftpConnection.server}}</span>
-                </li>
-                <li class="sibling tl_gray">
-                  <span class="title cell first">Port:</span>
-                  <span class="value cell last">{{ftpConnection.port}}</span>
-                </li>
-                <li class="sibling tl_gray">
-                  <span class="title cell first">User:</span>
-                  <span class="value cell last">{{ftpConnection.user}}</span>
-                </li>
-                <li class="sibling tl_gray">
-                  <span class="title cell first">Passwort:</span>
-                  <span class="value cell last">{{ftpConnection.password}}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          <div>
-            Pfade<br/>
-
-            {% if ftpConnection is iterable %}
-              it is
-            {% else %}
-              it's not
-            {% endif %}
-
-            <br/><br/>
-
-            {% for config in ftpConnection.ftpSyncConfig %}
-              {{config.sourcePath}} - {{config.destinationPath}}
-            {% endfor %}
-          </div>
 
         </li>
+          
+            {% if ftpConnection is iterable %}
+            <ul class="level_0">
+            <li class="tl_file click2edit toggle_select hover-div cf"></li>
+            </ul>
+            {% endif %}
+
+          <!--  {% for config in ftpConnection.ftpSyncConfig %}
+              {{config.sourcePath}} - {{config.destinationPath}}
+            {% endfor %}
+            -->
+          
+
+        
       {% endfor %}
     </ul>
-  </div>
+    </div>
 {% endblock %}

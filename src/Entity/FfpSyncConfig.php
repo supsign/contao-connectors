@@ -38,6 +38,13 @@ class FfpSyncConfig
      */
     protected $destinationPath;
 
+    /**
+     * Many features have one product. This is the owning side.
+     * @ORM\ManyToOne(targetEntity="FtpData", inversedBy="ftpSyncConfig")
+     * @ORM\JoinColumn(name="ftpSyncConfigId", referencedColumnName="id")
+     */
+    protected $ftpData;
+
     // Diese Funktion ist sehr hilfreich, um alle Daten als Array zu erhalten. 
     public function getData() {
         $arrData = [];

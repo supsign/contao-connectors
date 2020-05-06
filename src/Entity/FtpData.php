@@ -3,6 +3,8 @@
 namespace Supsign\ContaoConnectorsBundle\Entity;
 use \Doctrine\ORM\Mapping as ORM;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Class Log
  *
@@ -45,10 +47,22 @@ class FtpData
     protected $ftpProtocolId;
 
     /**
+     * @ORM\OneToOne(targetEntity="FtpProtocols")
+     * @ORM\JoinColumn(name="ftpProtocolId", referencedColumnName="id")
+     */
+    protected $ftpProtocol;
+
+    /**
      * @var int
      * @ORM\Column(type="integer")
      */
-    protected $ffpSyncConfigId;
+    protected $ftpSyncConfigId;
+
+    /**
+     * One product has many features. This is the inverse side.
+     * @ORM\OneToMany(targetEntity="FfpSyncConfig", mappedBy="ftpData")
+     */
+    protected $ftpSyncConfig;
 
     /**
      * @var string
@@ -72,7 +86,12 @@ class FtpData
      * @var string
      * @ORM\Column(type="string", options={"default" : ""})
      */
-    protected $password; 
+    protected $password;
+
+    public function __construct() {
+        $this->ftpProtocol = new ArrayCollection();
+        $this->ftpSyncConfig = new ArrayCollection();
+    }
 
     // Diese Funktion ist sehr hilfreich, um alle Daten als Array zu erhalten. 
     public function getData() {
@@ -86,7 +105,6 @@ class FtpData
         
         return $arrData;
     }
-
 
     /**
      * @return int

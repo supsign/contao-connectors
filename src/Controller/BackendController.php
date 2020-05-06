@@ -24,9 +24,12 @@ class BackendController extends AbstractController
      * @Route("/ftp-connections", name="supsign.connectors")
      */
 
-    public function default()
+    public function listConnections()
     {
-        $data = ['ftpData' => FtpDataModel::findAll()];
+        $data = array(
+            'ftpData' => FtpDataModel::findAll(),
+            'ftpProtocols' => FtpProtocolsModel::findAll()
+        );
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/index.html.twig', $data)
@@ -37,7 +40,7 @@ class BackendController extends AbstractController
      * @Route("/ftp-connections/delete", name="supsign.connectors.delete")
      */
 
-    public function delete()
+    public function deleteConnection()
     {
         if (!empty($_GET['id']) )
             FtpDataModel::findByPk($_GET['id'])->delete();
@@ -53,7 +56,7 @@ class BackendController extends AbstractController
      * @Route("/ftp-connections/edit", name="supsign.connectors.edit")
      */
 
-    public function edit()
+    public function editConnection()
     {
         $entry = !empty($_GET['id']) ? FtpDataModel::findByPk($_GET['id']) : new FtpDataModel;
 
@@ -71,7 +74,7 @@ class BackendController extends AbstractController
      * @Route("/ftp-connections/save", name="supsign.connectors.save")
      */
 
-    public function save()
+    public function saveConnection()
     {
         if (!empty($_GET['id']) )
             $entry = FtpDataModel::findByPk($_GET['id']);

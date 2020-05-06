@@ -11,70 +11,63 @@
 
 
 {% block main %}
-    	<div id="tl_buttons">
-    		<a class="header_new" href="contao/ftp-connections/edit">Hinzuf√ºgen</a>
-    	</div>
+  <div id="tl_buttons">
+    <a class="header_new" href="contao/ftp-connections/edit">Hinzuf√ºgen</a>
+  </div>
 
-	<div class="tl_listing_container parent_view">
-
+  <div class="tl_listing_container parent_view">
     <div class="tl_header">
     <table class="tl_header_table">
-      <tbody><tr>
-        <td><span class="tl_label">M&ouml;gliche Protokolle:</span> </td>
-        <td>FTP, SFTP</td>
-      </tr>
-      <tr>
-        <td><span class="tl_label">Autor:</span> </td>
-        <td>Supsign GmbH</td>
-      </tr>
-    </tbody></table>
+      <tbody>
+        <tr>
+          <td><span class="tl_label">M&ouml;gliche Protokolle:</span> </td>
+          <td>
+            {% for ftpProtocol in ftpProtocols %}{% if loop.index > 1 %}, {% endif %}{{ftpProtocol.title}}{% endfor %}
+          </td>
+        </tr>
+        <tr>
+          <td><span class="tl_label">Autor:</span> </td>
+          <td>Supsign GmbH</td>
+        </tr>
+      </tbody>
+    </table>
     </div>
 
     <ul>
-          {% for ftpConnection in ftpData %}
-      <li>
+      {% for ftpConnection in ftpData %}
+        <li>
+          <div class="tl_content">
+            <div class="tl_content_right">
+              <a href="contao/ftp-connections/edit?id={{ftpConnection.id}}" title="" class="edit"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Element bearbeiten"></a>
+              <a href="contao/ftp-connections/delete?id={{ftpConnection.id}}" title="" class="delete" onclick="if(!confirm('Soll der Eintrag ID 107431 wirklich gelˆscht werden?'))return false;Backend.getScrollOffset()"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Element lˆschen"></a>
+            </div>
 
-      <div class="tl_content">
-      <div class="tl_content_right">
-      <a href="contao/ftp-connections/edit?id={{ftpConnection.id}}" title="" class="edit"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Element bearbeiten"></a>
-      <a href="contao/ftp-connections/delete?id={{ftpConnection.id}}" title="" class="delete" onclick="if(!confirm('Soll der Eintrag ID 107431 wirklich gelˆscht werden?'))return false;Backend.getScrollOffset()"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Element lˆschen"></a>
-      </div>
-      <div class="cte_type published">{{ftpConnection.title}}</div>
-      <div class="limit_height">
-
-        <h1>{{ftpConnection.description}}</h1>
-
-      <div class="tl_gray">
-      <ul class="attributes">
-      <li class="sibling tl_gray">
-      <span class="title cell first">Server-Adresse:</span>
-      <span class="value cell last">{{ftpConnection.server}}</span>
-      </li>
-      <li class="sibling tl_gray">
-      <span class="title cell first">Port:</span>
-      <span class="value cell last">{{ftpConnection.port}}</span>
-      </li>
-      <li class="sibling tl_gray">
-      <span class="title cell first">User:</span>
-      <span class="value cell last">{{ftpConnection.user}}</span>
-      </li>
-      <li class="sibling tl_gray">
-      <span class="title cell first">Passwort:</span>
-      <span class="value cell last">{{ftpConnection.password}}</span>
-      </li>
-      </ul>
-      </div>
-
-      </div>
-
-  </li>
-
-			{% endfor %}
-
-</ul>
-
-
-	</div>
-
-
+            <div class="cte_type published">{{ftpConnection.title}}</div>
+            <div class="limit_height">
+              <h1>{{ftpConnection.description}}</h1>
+              <div class="tl_gray">
+              <ul class="attributes">
+                <li class="sibling tl_gray">
+                  <span class="title cell first">Server-Adresse:</span>
+                  <span class="value cell last">{{ftpConnection.server}}</span>
+                </li>
+                <li class="sibling tl_gray">
+                  <span class="title cell first">Port:</span>
+                  <span class="value cell last">{{ftpConnection.port}}</span>
+                </li>
+                <li class="sibling tl_gray">
+                  <span class="title cell first">User:</span>
+                  <span class="value cell last">{{ftpConnection.user}}</span>
+                </li>
+                <li class="sibling tl_gray">
+                  <span class="title cell first">Passwort:</span>
+                  <span class="value cell last">{{ftpConnection.password}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}

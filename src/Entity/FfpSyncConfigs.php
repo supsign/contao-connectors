@@ -7,10 +7,10 @@ use \Doctrine\ORM\Mapping as ORM;
  * Class Log
  *
  * @ORM\Entity
- * @ORM\Table(name="tl_ftp_sync_config")
+ * @ORM\Table(name="tl_ftp_sync_configs")
  * @ORM\Entity(repositoryClass="Supsign\ContaoConnectorsBundle\Repository\ConnectorsRepository")
  */
-class FfpSyncConfig
+class FfpSyncConfigs
 {
     /**
      * @var int

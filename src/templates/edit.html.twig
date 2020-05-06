@@ -1,14 +1,11 @@
 {% extends "@ContaoCore/Backend/be_page.html.twig" %}
 
 {% block headline %}
-    FTP Verbindungen - Bearbeiten
+    FTP Verbindungen - {% if ftpEntry.id %}Bearbeiten{% else %}Neu{% endif %}
 {% endblock %}
-
 
 {% block error %}
 {% endblock %}
-
-
 
 {% block main %}
     <div class="tl_listing_container">

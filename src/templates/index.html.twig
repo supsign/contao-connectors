@@ -4,17 +4,13 @@
     Verbindungen
 {% endblock %}
 
-
 {% block error %}
 {% endblock %}
 
-
-
 {% block main %}
   <div id="tl_buttons">
-    <a class="header_new" href="contao/ftp-connections/edit">Hinzuf√ºgen</a>
+    <a class="header_new" href="contao/ftp-connections/edit">Hinzuf&uuml;gen</a>
   </div>
-
   <div class="tl_listing_container parent_view">
     <div class="tl_header">
     <table class="tl_header_table">
@@ -22,7 +18,9 @@
         <tr>
           <td><span class="tl_label">M&ouml;gliche Protokolle:</span> </td>
           <td>
-            {% for ftpProtocol in ftpProtocols %}{% if loop.index > 1 %}, {% endif %}{{ftpProtocol.title}}{% endfor %}
+            {% for ftpProtocol in ftpProtocols %}
+              {{ftpProtocol.title}}{% if loop.length != loop.index %}, {% endif %}
+            {% endfor %}
           </td>
         </tr>
         <tr>
@@ -39,9 +37,8 @@
           <div class="tl_content">
             <div class="tl_content_right">
               <a href="contao/ftp-connections/edit?id={{ftpConnection.id}}" title="" class="edit"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Element bearbeiten"></a>
-              <a href="contao/ftp-connections/delete?id={{ftpConnection.id}}" title="" class="delete" onclick="if(!confirm('Soll der Eintrag ID 107431 wirklich gelˆscht werden?'))return false;Backend.getScrollOffset()"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Element lˆschen"></a>
+              <a href="contao/ftp-connections/delete?id={{ftpConnection.id}}" title="" class="delete" onclick="if(!confirm('Soll der Eintrag ID 107431 wirklich gel&ouml;scht werden?'))return false;Backend.getScrollOffset()"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Element lˆschen"></a>
             </div>
-
             <div class="cte_type published">{{ftpConnection.title}}</div>
             <div class="limit_height">
               <h1>{{ftpConnection.description}}</h1>
@@ -66,6 +63,11 @@
               </ul>
             </div>
           </div>
+
+          <div>
+            subinfo - here
+          </div>
+
         </li>
       {% endfor %}
     </ul>

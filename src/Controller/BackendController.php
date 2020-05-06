@@ -42,8 +42,12 @@ class BackendController extends AbstractController
 
     public function deleteConnection()
     {
-        if (!empty($_GET['id']) )
-            FtpDataModel::findByPk($_GET['id'])->delete();
+        if (!empty($_GET['id']) ) {
+            $entry = FtpDataModel::findByPk($_GET['id']);
+
+            if ($entry)
+                $entry->delete();
+        }
 
         $data = ['ftpData' => FtpDataModel::findAll()];
 
@@ -63,6 +67,11 @@ class BackendController extends AbstractController
         $data = array(
             'ftpProtocols' => FtpProtocolsModel::findAll(),
             'ftpEntry' => $entry
+        );
+
+        var_dump(
+            $entry->ftpProtocol,
+            $entry->ftpSyncConfig
         );
 
         return new Response(

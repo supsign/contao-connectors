@@ -2,10 +2,11 @@
 
 namespace Supsign\ContaoConnectorsBundle;
 
-use Supsign\ContaoConnectorsBundle\Model\FtpDataModel;
-use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
+use Supsign\ContaoConnectorsBundle\EntityManagerTrait;
 
 class FtpConnection {
+	use EntityManagerTrait;
+
 	private 
 		$ftpConnections = [],
 		$protocol = null,
@@ -14,7 +15,7 @@ class FtpConnection {
 		$password = null;
 
 	public function __construct() {
-		$this->ftpConnections = FtpDataModel::findAll();
+		$this->ftpConnections = $this->getRepository('FtpData')->findAll();
 	}
 
 	public function connect() {
@@ -31,14 +32,14 @@ class FtpConnection {
 
 	public function iterate() {
 		foreach ($this->ftpConnections AS $connection) {
-			$this->server 	= $connection->server;
-			$this->port   	= $connection->port;
-			$this->password = $connection->password;
+			$this->server 	= $connection->getServer();
+			$this->port   	= $connection->getPort();
+			$this->password = $connection->getPassword();
 
 			var_dump(
-				$connection->server,
-				$connection->port,
-				$connection->password
+				$this->server,
+				$this->port,
+				$this->password
 			);
 		}
 		

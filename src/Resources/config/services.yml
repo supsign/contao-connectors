@@ -11,5 +11,7 @@ services:
                   priority: -255,
               }
     Supsign\ContaoConnectorsBundle\Migration\ImportValues:
+        arguments:
+            - "@database_connection"
         tags:
             - { name: contao.migration, priority: 0 }

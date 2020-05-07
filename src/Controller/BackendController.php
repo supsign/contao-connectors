@@ -5,6 +5,7 @@ namespace Supsign\ContaoConnectorsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Supsign\ContaoConnectorsBundle\FtpConnection;
 use Supsign\ContaoConnectorsBundle\EntityManagerTrait;
 use Supsign\ContaoConnectorsBundle\Entity\FtpData;
 use Supsign\ContaoConnectorsBundle\Entity\FtpSyncConfigs;
@@ -202,10 +203,10 @@ class BackendController extends AbstractController
 
     public function test()
     {
+        $blubb = new FtpConnection;
 
-        $ftpData = $this->getEntityManager()->getRepository($this->entityNamespace.'FtpData')->findAll();
-
-        var_dump($ftpData);
+        $blubb->iterate();
+        
 
 
         return new Response(

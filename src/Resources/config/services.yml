@@ -4,9 +4,12 @@ services:
             - "@router"
             - "@request_stack"
         tags:
-            - { 
-                name: kernel.event_listener,
-                event: contao.backend_menu_build,
-                method: onBuild,
-                priority: -255
+            - {
+                  name: kernel.event_listener,
+                  event: contao.backend_menu_build,
+                  method: onBuild,
+                  priority: -255,
               }
+    Supsign\ContaoConnectorsBundle\Migration\ImportValues:
+        tags:
+            - { name: contao.migration, priority: 0 }

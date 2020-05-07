@@ -18,7 +18,6 @@ class ImportValues extends AbstractMigration
     public function __construct(Connection $connection)
     {
         $this->connection = $connection;
-        echo "1";
     }
 
 
@@ -29,28 +28,28 @@ class ImportValues extends AbstractMigration
         if (!$schemaManager->tablesExist(['tl_ftp_protocols'])) {
             return false;
         }
-        return true;
-        $columns = $schemaManager->listTableColumns('tl_ftp_protocols');
 
-        return
-            isset($columns['title']) &&
-            isset($columns['description']);
+        $count = $this->connection->query('SELECT COUNT(*) FROM tl_ftp_protocols');
+        $count->execute();
+
+        return $count->fetchall()[0]['COUNT(*)'] < 2;
     }
 
     public function run(): MigrationResult
     {
-        echo "3";
-        var_dump("3");
-        $stmt = $this->connection->query('
-            UPDATE or INSERT into tl_ftp_protocols (title,description)
-                values ("FTP", "")
-                matching (title)');
+        $this->connection->query('
+        INSERT INTO tl_ftp_protocols (id,title,description,tstamp) 
+            VALUES (1, "FTP", "FTP-Connection", CURRENT_TIMESTAMP) 
+                ON DUPLICATE KEY UPDATE title="FTP", description="FTP-Connection"')->execute();
 
-        $stmt->execute();
+        $this->connection->query('
+        INSERT INTO tl_ftp_protocols (id,title,description,tstamp)
+            VALUES (2, "SFTP", "SFTP-Connection", CURRENT_TIMESTAMP)
+                ON DUPLICATE KEY UPDATE title="SFTP", description="SFTP-Connection"')->execute();
 
         return new MigrationResult(
             true,
-            'Combined ' . $stmt->rowCount() . ' customer names.'
+            'Set default Values in tl_ftp_protocols.'
         );
     }
 }

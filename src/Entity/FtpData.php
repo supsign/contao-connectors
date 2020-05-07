@@ -3,8 +3,6 @@
 namespace Supsign\ContaoConnectorsBundle\Entity;
 use \Doctrine\ORM\Mapping as ORM;
 
-use Doctrine\Common\Collections\ArrayCollection;
-
 /**
  * Class Log
  *
@@ -36,7 +34,7 @@ class FtpData
 
     /**
      * @var string
-     * @ORM\Column(type="string", options={"default" : ""})
+     * @ORM\Column(type="string", options={"default" : ""}, nullable=true)
      */
     protected $description;
 
@@ -45,18 +43,6 @@ class FtpData
      * @ORM\Column(type="integer")
      */
     protected $ftpProtocolId;
-
-    /**
-     * @ORM\OneToOne(targetEntity="FtpProtocols")
-     * @ORM\JoinColumn(name="ftpProtocolId", referencedColumnName="id")
-     */
-    protected $ftpProtocol;
-
-    /**
-     * One product has many features. This is the inverse side.
-     * @ORM\OneToMany(targetEntity="FtpSyncConfigs", mappedBy="ftpData")
-     */
-    protected $ftpSyncConfig;
 
     /**
      * @var string

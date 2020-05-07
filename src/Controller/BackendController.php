@@ -11,6 +11,9 @@ use Supsign\ContaoConnectorsBundle\Model\FtpProtocolsModel;
 use Supsign\ContaoConnectorsBundle\Model\FtpSyncConfigsModel;
 use Supsign\ContaoConnectorsBundle\FtpConnection;
 
+use Supsign\ContaoConnectorsBundle\Entity\FtpData;
+use Supsign\ContaoConnectorsBundle\Entity\FtpProtocols;
+
 /**
  * @Route("/contao", defaults={
  *     "_scope" = "backend",
@@ -20,34 +23,6 @@ use Supsign\ContaoConnectorsBundle\FtpConnection;
  */
 class BackendController extends AbstractController
 {
-
-    /**
-     * @Route("/ftp-connections", name="supsign.connectors")
-     */
-
-    public function listConnections()
-    {
-        $ftpData = FtpDataModel::findAll();
-
-        foreach ($ftpData AS $ftpConnection) {
-            var_dump(
-                $ftpConnection->ftpProtocol,
-                $ftpConnection->ftpSyncConfig
-            );
-        }
-
-        $data = array(
-            'ftpData' => $ftpData,
-            'ftpProtocols' => FtpProtocolsModel::findAll()
-        );
-
-        // var_dump($ftpData);
-
-        return new Response(
-            $this->get('twig')->render('@ContaoConnectors/index.html.twig', $data)
-        );
-    }
-
     /**
      * @Route("/ftp-connections/delete", name="supsign.connectors.delete")
      */
@@ -83,6 +58,40 @@ class BackendController extends AbstractController
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/edit.html.twig', $data)
+        );
+    }
+
+    public function getEntityManager() {
+        if (!$this->entityManager)
+            $this->entityManager = \Contao\System::getContainer()->get('doctrine.orm.default_entity_manager');
+
+        return $this->entityManager;
+    }
+
+    /**
+     * @Route("/ftp-connections", name="supsign.connectors")
+     */
+
+    public function listConnections()
+    {
+        $ftpData = FtpDataModel::findAll();
+
+        foreach ($ftpData AS $ftpConnection) {
+            var_dump(
+                $ftpConnection->ftpProtocol,
+                $ftpConnection->ftpSyncConfig
+            );
+        }
+
+        $data = array(
+            'ftpData' => $ftpData,
+            'ftpProtocols' => FtpProtocolsModel::findAll()
+        );
+
+        // var_dump($ftpData);
+
+        return new Response(
+            $this->get('twig')->render('@ContaoConnectors/index.html.twig', $data)
         );
     }
 
@@ -129,14 +138,27 @@ class BackendController extends AbstractController
 
     public function test()
     {
-        $test = FtpSyncConfigsModel::findAll();
+        $entry = new FtpData;
+        $entry
+            ->setTitle('test title blubb')
+            ->setDescription('Beschreibung')
+            ->setTstamp(time() )
+            ->setServer('hostname')
+            ->setPort(3306)
+            ->setUser('Benutzername')
+            ->setPassword('1234xxx')
+            ->setFtpProtocolId(2);
 
-        var_dump($test);
+        // $entry = new FtpProtocols;
+        // $entry
+        //     ->setTitle('test title')
+        //     ->setDescription('Beschreibung')
+        //     ->setTstamp(time() );
 
+        var_dump($entry);
 
-
-        // $con = new FtpConnection;
-        // $con->iterate();
+        $this->getEntityManager()->persist($entry);
+        $this->getEntityManager()->flush();
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/test.html.twig', [])

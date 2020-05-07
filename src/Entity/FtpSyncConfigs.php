@@ -33,12 +33,6 @@ class FtpSyncConfigs
     protected $ftpDataId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="FtpData", inversedBy="ftpSyncConfig")
-     * @ORM\JoinColumn(name="ftpDataId", referencedColumnName="id")
-     */
-    protected $ftpData;
-
-    /**
      * @var string
      * @ORM\Column(type="string", options={"default" : ""})
      */

@@ -84,7 +84,7 @@ class FtpData
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -166,7 +166,7 @@ class FtpData
      *
      * @return  int
      */ 
-    public function getFtpProtocolId(): int
+    public function getFtpProtocolId()
     {
         return $this->ftpProtocolId;
     }

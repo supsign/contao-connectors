@@ -1,0 +1,27 @@
+{% extends "@ContaoCore/Backend/be_page.html.twig" %}
+
+{% block headline %}
+    FTP Verbindungen - Config - {% if config.id %}Bearbeiten{% else %}Neu{% endif %}
+{% endblock %}
+
+{% block error %}
+{% endblock %}
+
+{% block main %}
+    <div class="tl_listing_container">
+        <div>
+    	   <button><a href="contao/ftp-connections">zurück</a></button>
+        </div>
+        <br/>
+        <div>
+            <form method="post" action="contao/ftp-connections/config/save?id={{config.id}}">
+                <input type="hidden" value="{{ftpConnection_id}}" name="ftpConnection">
+                Name<input type="text" value="{{config.title}}" name="title"/><br/>
+                Quelle<input type="text" value="{{config.sourcePath}}" name="sourcePath"/><br/>
+                Ziel<input type="text" value="{{config.destinationPath}}" name="destinationPath"/><br/>
+                <br/>
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+{% endblock %}

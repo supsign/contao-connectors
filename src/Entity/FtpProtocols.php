@@ -65,7 +65,7 @@ class FtpProtocols
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -114,30 +114,6 @@ class FtpProtocols
     public function setTitle(string $title)
     {
         $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of description
-     *
-     * @return  string
-     */ 
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set the value of description
-     *
-     * @param  string  $description
-     *
-     * @return  self
-     */ 
-    public function setDescription(string $description)
-    {
-        $this->description = $description;
 
         return $this;
     }

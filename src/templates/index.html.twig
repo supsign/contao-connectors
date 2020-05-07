@@ -32,14 +32,21 @@
 
           <div class="tl_content_right">
             <a href="contao/ftp-connections/edit?id={{ftpConnection.id}}" title="" class="edit"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Element bearbeiten"></a>
-            <a href="contao/ftp-connections/delete?id={{ftpConnection.id}}" title="" class="delete" onclick="if(!confirm('Soll der Eintrag ID 107431 wirklich gel&ouml;scht werden?'))return false;Backend.getScrollOffset()"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Element l�schen"></a>
+            <a href="contao/ftp-connections/delete?id={{ftpConnection.id}}" title="" class="delete" onclick="if(!confirm('Soll der Eintrag ID 107431 wirklich gel&ouml;scht werden?'))return false;Backend.getScrollOffset()"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Element l&ouml;schen"></a>
           </div>
         </li>
+
+        <a class="header_new" href="contao/ftp-connections/config/edit?parent_id={{ftpConnection.id}}">Hinzuf&uuml;gen</a>
         
         {% for config in ftpConnection.syncConfigs %}
           <ul class="level_0">
             <li class="tl_file click2edit toggle_select hover-div cf">
               {{config.title}}: {{config.sourcePath}} -> {{config.destinationPath}}
+
+              <div class="tl_content_right">
+                <a href="contao/ftp-connections/config/edit?id={{config.id}}" title="" class="edit"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Element bearbeiten"></a>
+                <a href="contao/ftp-connections/config/delete?id={{config.id}}" title="" class="delete" onclick="if(!confirm('Soll der Eintrag ID 107431 wirklich gel&ouml;scht werden?'))return false;Backend.getScrollOffset()"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Element l&ouml;schen"></a>
+              </div>
             </li>
           </ul>
         {% endfor %}

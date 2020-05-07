@@ -66,7 +66,7 @@ class FtpSyncConfigs
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -176,5 +176,19 @@ class FtpSyncConfigs
     public function getFtpConnection()
     {
         return $this->ftpConnection;
+    }
+
+    /**
+     * Set the value of ftpConnection
+     *
+     * @param  FtpData $ftpConnection
+     *
+     * @return  self
+     */ 
+    public function setFtpConnection(FtpData $ftpConnection)
+    {
+        $this->ftpConnection = $ftpConnection;
+
+        return $this;
     }
 }

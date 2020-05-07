@@ -5,8 +5,8 @@ namespace Supsign\ContaoConnectorsBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Supsign\ContaoConnectorsBundle\EntityManagerTrait;
 use Supsign\ContaoConnectorsBundle\Entity\FtpData;
-use Supsign\ContaoConnectorsBundle\Entity\FtpProtocols;
 use Supsign\ContaoConnectorsBundle\Entity\FtpSyncConfigs;
 
 /**
@@ -18,7 +18,7 @@ use Supsign\ContaoConnectorsBundle\Entity\FtpSyncConfigs;
  */
 class BackendController extends AbstractController
 {
-    protected $entityNamespace = 'Supsign\ContaoConnectorsBundle\Entity\\';
+    use EntityManagerTrait;
 
     /**
      * @Route("/ftp-connections/config/delete", name="supsign.connectors.config.delete")
@@ -103,17 +103,6 @@ class BackendController extends AbstractController
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/editConnection.html.twig', $data)
         );
-    }
-
-    protected function getEntityManager() {
-        if (!$this->entityManager)
-            $this->entityManager = \Contao\System::getContainer()->get('doctrine.orm.default_entity_manager');
-
-        return $this->entityManager;
-    }
-
-    protected function getRepository($entity) {
-        return $this->getEntityManager()->getRepository($this->entityNamespace.$entity);
     }
 
     /**

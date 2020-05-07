@@ -2,6 +2,7 @@
 
 namespace Supsign\ContaoConnectorsBundle\Entity;
 use \Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Log
@@ -39,12 +40,6 @@ class FtpData
     protected $description;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer")
-     */
-    protected $ftpProtocolId;
-
-    /**
      * @var string
      * @ORM\Column(type="string", options={"default" : ""})
      */
@@ -67,6 +62,20 @@ class FtpData
      * @ORM\Column(type="string", options={"default" : ""})
      */
     protected $password;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="FtpProtocols", inversedBy="ftpConnections")
+     */
+    protected $protocol;
+
+    /**
+     * @ORM\OneToMany(targetEntity="FtpSyncConfigs", mappedBy="ftpConnection")
+     */
+    protected $syncConfigs;
+
+    public function __construct() {
+        $this->syncConfigs = new ArrayCollection();
+    }
 
     // Diese Funktion ist sehr hilfreich, um alle Daten als Array zu erhalten. 
     public function getData() {
@@ -157,30 +166,6 @@ class FtpData
     public function setDescription(string $description)
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of title
-     *
-     * @return  int
-     */ 
-    public function getFtpProtocolId()
-    {
-        return $this->ftpProtocolId;
-    }
-
-    /**
-     * Set the value of ftpProtocolId
-     *
-     * @param  int  $ftpProtocolId
-     *
-     * @return  self
-     */ 
-    public function setFtpProtocolId(int $ftpProtocolId)
-    {
-        $this->ftpProtocolId = $ftpProtocolId;
 
         return $this;
     }
@@ -279,5 +264,39 @@ class FtpData
         $this->password = $password;
 
         return $this;
+    }
+
+    /**
+     * Get the value of protocol
+     *
+     * @return FtpProtocols
+     */ 
+    public function getProtocol()
+    {
+        return $this->protocol;
+    }
+
+    /**
+     * Set the value of password
+     *
+     * @param  string  $password
+     *
+     * @return  self
+     */ 
+    public function setProtocol(FtpProtocols $protocol)
+    {
+        $this->protocol = $protocol;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of protocol
+     *
+     * @return ArrayCollection
+     */ 
+    public function getSyncConfigs()
+    {
+        return $this->syncConfigs;
     }
 }

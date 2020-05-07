@@ -47,11 +47,9 @@ class BackendController extends AbstractController
 
     public function editConnection()
     {
-        $entry = !empty($_GET['id']) ? $this->getRepository('FtpData')->find($_GET['id']) : new FtpData;
-
         $data = array(
             'ftpProtocols' => $this->getRepository('FtpProtocols')->findAll(),
-            'ftpEntry' => $entry
+            'ftpEntry' => !empty($_GET['id']) ? $this->getRepository('FtpData')->find($_GET['id']) : new FtpData
         );
 
         return new Response(
@@ -103,7 +101,8 @@ class BackendController extends AbstractController
                 throw new \Exception(__FILE__.':'.__LINE__.' - no value for "'.$key.'"', 1);
 
             switch ($key) {
-                //  data validation
+                case 'protocol':
+                    $value = $this->getRepository('FtpProtocols')->find($value);
 
                 default:
                     $entry->{'set'.ucfirst($key)}($value);

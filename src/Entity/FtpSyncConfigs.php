@@ -2,6 +2,7 @@
 
 namespace Supsign\ContaoConnectorsBundle\Entity;
 use \Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Log
@@ -27,10 +28,10 @@ class FtpSyncConfigs
     protected $tstamp;
 
     /**
-     * @var int
-     * @ORM\Column(type="integer")
+     * @var string
+     * @ORM\Column(type="string", options={"default" : ""})
      */
-    protected $ftpDataId;
+    protected $title;
 
     /**
      * @var string
@@ -44,6 +45,11 @@ class FtpSyncConfigs
      */
     protected $destinationPath;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="FtpData", inversedBy="syncConfigs")
+     */
+    protected $ftpConnection;
+
     // Diese Funktion ist sehr hilfreich, um alle Daten als Array zu erhalten. 
     public function getData() {
         $arrData = [];
@@ -55,5 +61,120 @@ class FtpSyncConfigs
         }
         
         return $arrData;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * Get the value of tstamp
+     *
+     * @return  int
+     */ 
+    public function getTstamp()
+    {
+        return $this->tstamp;
+    }
+
+    /**
+     * Set the value of tstamp
+     *
+     * @param  int  $tstamp
+     *
+     * @return  self
+     */ 
+    public function setTstamp(int $tstamp)
+    {
+        $this->tstamp = $tstamp;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of title
+     *
+     * @return  string
+     */ 
+    public function getTitle()
+    {
+        return $this->title;
+    }
+
+    /**
+     * Set the value of title
+     *
+     * @param  string  $title
+     *
+     * @return  self
+     */ 
+    public function setTitle(string $title)
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of sourcePath
+     *
+     * @return  string
+     */ 
+    public function getSourcePath()
+    {
+        return $this->sourcePath;
+    }
+
+    /**
+     * Set the value of sourcePath
+     *
+     * @param  string  $sourcePath
+     *
+     * @return  self
+     */ 
+    public function setSourcePath(string $sourcePath)
+    {
+        $this->sourcePath = $sourcePath;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of destinationPath
+     *
+     * @return  string
+     */ 
+    public function getDestinationPath()
+    {
+        return $this->destinationPath;
+    }
+
+    /**
+     * Set the value of destinationPath
+     *
+     * @param  string  $destinationPath
+     *
+     * @return  self
+     */ 
+    public function setDestinationPath(string $destinationPath)
+    {
+        $this->destinationPath = $destinationPath;
+
+        return $this;
+    }
+
+
+    /**
+     * Get the value of ftpConnection
+     *
+     * @return  FtpData
+     */ 
+    public function getFtpConnection()
+    {
+        return $this->ftpConnection;
     }
 }

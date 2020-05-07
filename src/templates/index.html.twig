@@ -28,28 +28,21 @@
             <img src="bundles/contaoconnectors/img/server.svg" width="18" height="18" alt="">
             <strong>{{ftpConnection.title}}</strong> - {{ftpConnection.description}}<br>
             {{ftpConnection.user}}@{{ftpConnection.server}}:{{ftpConnection.port}}
-            </div>
+          </div>
 
-            <div class="tl_content_right">
-              <a href="contao/ftp-connections/edit?id={{ftpConnection.id}}" title="" class="edit"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Element bearbeiten"></a>
-              <a href="contao/ftp-connections/delete?id={{ftpConnection.id}}" title="" class="delete" onclick="if(!confirm('Soll der Eintrag ID 107431 wirklich gel&ouml;scht werden?'))return false;Backend.getScrollOffset()"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Element l�schen"></a>
-            </div>
-
+          <div class="tl_content_right">
+            <a href="contao/ftp-connections/edit?id={{ftpConnection.id}}" title="" class="edit"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Element bearbeiten"></a>
+            <a href="contao/ftp-connections/delete?id={{ftpConnection.id}}" title="" class="delete" onclick="if(!confirm('Soll der Eintrag ID 107431 wirklich gel&ouml;scht werden?'))return false;Backend.getScrollOffset()"><img src="system/themes/flexible/icons/delete.svg" width="16" height="16" alt="Element l�schen"></a>
+          </div>
         </li>
-          
-            {% if ftpConnection is iterable %}
-            <ul class="level_0">
-            <li class="tl_file click2edit toggle_select hover-div cf"></li>
-            </ul>
-            {% endif %}
-
-          <!--  {% for config in ftpConnection.ftpSyncConfig %}
-              {{config.sourcePath}} - {{config.destinationPath}}
-            {% endfor %}
-            -->
-          
-
         
+        {% for config in ftpConnection.syncConfigs %}
+          <ul class="level_0">
+            <li class="tl_file click2edit toggle_select hover-div cf">
+              {{config.title}}: {{config.sourcePath}} -> {{config.destinationPath}}
+            </li>
+          </ul>
+        {% endfor %}
       {% endfor %}
     </ul>
     </div>

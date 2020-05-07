@@ -2,6 +2,7 @@
 
 namespace Supsign\ContaoConnectorsBundle\Entity;
 use \Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Log
@@ -37,6 +38,15 @@ class FtpProtocols
      * @ORM\Column(type="string", options={"default" : ""})
      */
     protected $description;
+
+    /**
+     * @ORM\OneToMany(targetEntity="FtpData", mappedBy="protocol")
+     */
+    protected $ftpConnections;
+
+    public function __construct() {
+        $this->ftpConnections = new ArrayCollection();
+    }
 
     // Diese Funktion ist sehr hilfreich, um alle Daten als Array zu erhalten. 
     public function getData() {

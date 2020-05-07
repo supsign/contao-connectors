@@ -1,35 +1,84 @@
 {% extends "@ContaoCore/Backend/be_page.html.twig" %}
 
 {% block headline %}
-    FTP Verbindungen - {% if ftpEntry.id %}Bearbeiten{% else %}Neu{% endif %}
+    <span>FTP Verbindungen</span> > {% if ftpEntry.id %}<span>Bearbeiten</span>{% else %}<span>Neu{% endif %}</span>
 {% endblock %}
 
 {% block error %}
 {% endblock %}
 
 {% block main %}
-    <div class="tl_listing_container">
-        <div>
-    	   <button><a href="contao/ftp-connections">zurÃ¼ck</a></button>
-        </div>
-        <br/>
-        <div>
-            <form method="post" action="contao/ftp-connections/save?id={{ftpEntry.id}}">
-            	Protokoll
-            	<select name="protocol">
-            		{% for ftpProtocol in ftpProtocols %}
-            			<option {% if ftpEntry.protocol.id == ftpProtocol.id %} selected {% endif %} value="{{ftpProtocol.id}}">{{ftpProtocol.title}}</option>
-            		{% endfor %}
-            	</select><br/>
-            	Name<input type="text" value="{{ftpEntry.title}}" name="title"/><br/>
-            	Beschreibung<input type="text" value="{{ftpEntry.description}}" name="description"/><br/>
+<div id="tl_buttons">
+<a href="contao/ftp-connections" class="header_back" title="" onclick="Backend.getScrollOffset()">zurÃ¼ck</a>
+</div>
+            <form id="tl_article" class="tl_form tl_edit_form" method="post" action="contao/ftp-connections/save?id={{ftpEntry.id}}">
+            	<div class="tl_formbody_edit">
+					<fieldset id="pal_title_legend" class="tl_tbox">
+						<legend onclick="AjaxRequest.toggleFieldset(this,'title_legend','tl_article')">Allgemeine Einstellungen</legend>
+							
+							<div class="w50 clr widget">
+  								<h3>
+									<label for="ctrl_title" class="mandatory">
+										<span class="invisible">Mandatory field </span>
+										Titel
+										<span class="mandatory">*</span>
+									</label>
+								</h3>
+  								<input type="text" name="title" id="ctrl_title" class="tl_text mandatory" value="{{ftpEntry.title}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
+  								<p class="tl_help tl_tip" title="">Bitte fügen Sie einen eindeutigen Namen für die Verbindung hinzu.</p>
+							</div>
+							
+							<div class="w50 widget">
+  								<h3>
+								  <label>
+								  	<span class="invisible">Mandatory field </span>
+									Protokoll
+									<span class="mandatory">*</span>
+								   </label>
+								</h3>
+  							
+							  <select name="protocol" id="ctrl_protocol" class="tl_select tl_chosen" onfocus="Backend.getScrollOffset()" style="display: none;">
+            					{% for ftpProtocol in ftpProtocols %}
+            					<option {% if ftpEntry.protocol.id == ftpProtocol.id %} selected {% endif %} value="{{ftpProtocol.id}}">{{ftpProtocol.title}}</option>
+            					{% endfor %}
+							  </select>
+					  		<p class="tl_help tl_tip" title="">Wählen Sie das gewünschte Protokoll.</p>
+							</div>
+
+							<div class=" clr widget">
+  								<h3>
+									<label for="ctrl_description" class="mandatory">
+										<span class="invisible">Mandatory field </span>
+										Beschreibung
+										<span class="mandatory">*</span>
+									</label>
+								</h3>
+  								<input type="text" name="description" id="ctrl_description" class="tl_text mandatory" value="{{ftpEntry.description}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
+  								<p class="tl_help tl_tip" title="">Für das soll die Verbindung eingesetzt werden.</p>
+							</div>
+
+</fieldset>
+
+
+
+				</div>
+				
+				
             	Server<input type="text" value="{{ftpEntry.server}}" name="server"/><br/>
             	Port<input type="text" value="{{ftpEntry.port}}" name="port"/><br/>
             	User<input type="text" value="{{ftpEntry.user}}" name="user"/><br/>
             	Password<input type="text" value="{{ftpEntry.password}}" name="password"/><br/>
             	<br/>
             	<input type="submit">
+
+<div class="tl_formbody_submit">
+<div class="tl_submit_container">
+  <button type="submit" name="save" id="save" class="tl_submit" accesskey="s">Speichern und zurÃ¼ck</button> 
+</div>
+</div>
+
+
             </form>
-        </div>
-    </div>
+        
+    
 {% endblock %}

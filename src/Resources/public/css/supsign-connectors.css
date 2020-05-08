@@ -1,0 +1,20 @@
+.supsign-connectors .tl_left img {
+  vertical-align: bottom;
+}
+
+.supsign-connectors .tl_listing .tl_left {
+  margin-left: 25px;
+  text-indent: -25px;
+}
+
+.supsign-connectors .tl_listing .tl_folder .tl_left img {
+  margin-right: 5px;
+}
+
+.supsign-connectors .tl_listing .tl_folder {
+  line-height: 1.2;
+}
+
+.supsign-connectors .tl_tree_xtnd .tl_file {
+  padding-left: 60px;
+}

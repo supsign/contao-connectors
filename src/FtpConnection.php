@@ -8,17 +8,33 @@ class FtpConnection {
 	use EntityManagerTrait;
 
 	private 
+		$connection = null,
 		$ftpConnections = [],
-		$protocol = null,
-		$server = null,
+		$password = null,
 		$port = null,
-		$password = null;
+		$protocol = null,
+		$server = null;
 
 	public function __construct() {
 		$this->ftpConnections = $this->getRepository('FtpData')->findAll();
 	}
 
 	public function connect() {
+		switch ($this->protocol) {
+			case 'FTP':
+				break;
+			
+			case 'SFTP':
+			default:
+				// $this->connection = ssh2_connect($this->server, $this->port);
+
+				var_dump(
+					$this->connection
+				);
+				break;
+		}
+
+
 
 	}
 
@@ -32,15 +48,12 @@ class FtpConnection {
 
 	public function iterate() {
 		foreach ($this->ftpConnections AS $connection) {
+			$this->protocol = $connection->getProtocol()->getTitle();
 			$this->server 	= $connection->getServer();
 			$this->port   	= $connection->getPort();
 			$this->password = $connection->getPassword();
 
-			var_dump(
-				$this->server,
-				$this->port,
-				$this->password
-			);
+			$this->connect();
 		}
 		
 	}

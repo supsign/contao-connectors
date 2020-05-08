@@ -69,7 +69,7 @@ class FtpData
     protected $protocol;
 
     /**
-     * @ORM\OneToMany(targetEntity="FtpSyncConfigs", mappedBy="ftpConnection")
+     * @ORM\OneToMany(targetEntity="FtpSyncConfigs", mappedBy="ftpConnection", cascade={"remove"})
      */
     protected $syncConfigs;
 

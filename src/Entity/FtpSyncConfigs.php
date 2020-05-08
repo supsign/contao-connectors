@@ -35,13 +35,13 @@ class FtpSyncConfigs
 
     /**
      * @var string
-     * @ORM\Column(type="string", options={"default" : ""})
+     * @ORM\Column(type="string", options={"default" : ""}, nullable=true)
      */
     protected $sourcePath;
 
     /**
      * @var string
-     * @ORM\Column(type="string", options={"default" : ""})
+     * @ORM\Column(type="string", options={"default" : ""}, nullable=true)
      */
     protected $destinationPath;
 

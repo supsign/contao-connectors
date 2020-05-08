@@ -33,6 +33,9 @@ class FtpConnection {
 				break;
 		}
 
+        if (!$this->connection)
+            throw new \Exception('Could not connect to "'.$this->server.'" on port "'.$this->port.'".');
+
 		return $this->login();
 	}
 
@@ -70,7 +73,7 @@ class FtpConnection {
 						
 			case 'SFTP':
 			default:
-				$stream = fopen('ssh2.sftp://'.$this->sftp.$remote_file, 'w');
+				$stream = fopen('ssh2.sftp://'.$this->sftp.$remoteFile, 'w');
 
 		        if (! $stream)
 		            throw new \Exception('Could not open file: '.$remoteFile);

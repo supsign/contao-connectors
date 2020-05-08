@@ -41,29 +41,49 @@ class FtpConnection {
 	}
 
 	public function login() {
-		if (!ssh2_auth_password($this->connection, $this->user, $this->password) )	//	SSH key variant? 
-			throw new \Exception('Could not authenticate with username '.$username.' and password '.$password);
+		switch ($this->protocol) {
+			case 'FTP':
+				# code...
+				break;
+						
+			case 'SFTP':
+			default:
+				if (!ssh2_auth_password($this->connection, $this->user, $this->password) )	//	SSH key variant? 
+					throw new \Exception('Could not authenticate with username '.$username.' and password '.$password);
 
-        $this->sftp = ssh2_sftp($this->connection);
+		        $this->sftp = ssh2_sftp($this->connection);
 
-        if (!$this->sftp)
-            throw new \Exception('Could not initialize SFTP subsystem.');
+		        if (!$this->sftp)
+		            throw new \Exception('Could not initialize SFTP subsystem.');
+
+				break;
+		}
 
 		return $this;
 	}
 
 	public function uploadFile($localFile, $remoteFile) {
-		$stream = fopen('ssh2.sftp://'.$this->sftp.$remote_file, 'w');
+		switch ($this->protocol) {
+			case 'FTP':
+				# code...
+				break;
+						
+			case 'SFTP':
+			default:
+				$stream = fopen('ssh2.sftp://'.$this->sftp.$remote_file, 'w');
 
-        if (! $stream)
-            throw new \Exception('Could not open file: '.$remoteFile);
+		        if (! $stream)
+		            throw new \Exception('Could not open file: '.$remoteFile);
 
-        $fileContent = file_get_contents($localFile);
+		        $fileContent = file_get_contents($localFile);
 
-        if (fwrite($stream, $fileContent) === false)
-            throw new \Exception('Could not send data from file: '. $localFile);
+		        if (fwrite($stream, $fileContent) === false)
+		            throw new \Exception('Could not send data from file: '. $localFile);
 
-        fclose($stream);
+		        fclose($stream);
+
+				break;
+		}
 
         return $this;
 	}

@@ -59,7 +59,7 @@ class FtpData
 
     /**
      * @var string
-     * @ORM\Column(type="string", options={"default" : ""})
+     * @ORM\Column(type="string", options={"default" : ""}, nullable=true)
      */
     protected $password;
 

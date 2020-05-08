@@ -122,10 +122,6 @@ class BackendController extends AbstractController
     }
 
     /**
-     * @Route("/ftp-connections/save", name="supsign.connectors.save")
-     */
-
-    /**
      * @Route("/ftp-connections/config/save", name="supsign.connectors.config.save")
      */
 
@@ -138,7 +134,8 @@ class BackendController extends AbstractController
 
         foreach ($_POST AS $key => $value) {
             if (empty($value) )
-                throw new \Exception(__FILE__.':'.__LINE__.' - no value for "'.$key.'"', 1);
+                continue;
+                // throw new \Exception(__FILE__.':'.__LINE__.' - no value for "'.$key.'"', 1);
 
             switch ($key) {
                 case 'ftpConnection':
@@ -162,6 +159,10 @@ class BackendController extends AbstractController
         );
     }
 
+    /**
+     * @Route("/ftp-connections/save", name="supsign.connectors.save")
+     */
+
     public function saveConnection()
     {
         if (!empty($_GET['id']) )
@@ -173,7 +174,8 @@ class BackendController extends AbstractController
 
         foreach ($_POST AS $key => $value) {
             if (empty($value) )
-                throw new \Exception(__FILE__.':'.__LINE__.' - no value for "'.$key.'"', 1);
+                continue;
+                // throw new \Exception(__FILE__.':'.__LINE__.' - no value for "'.$key.'"', 1);
 
             switch ($key) {
                 case 'protocol':

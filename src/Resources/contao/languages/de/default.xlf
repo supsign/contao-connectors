@@ -1,18 +1,15 @@
-<?xml version="1.0" ?><xliff version="1.1">
-  <file datatype="php" original="src/Resources/contao/languages/en/default.php" source-language="en" target-language="de">
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.1">
+  <file>
     <body>
-      <trans-unit id="MSC.supsign">
-        <source></source>
-        <target>Supsign GmbH</target>
+    
+      <trans-unit id="connectors.addServer">
+        <target>Server hinzufügen</target>
       </trans-unit>
-      <trans-unit id="MSC.ConnectorsName">
-        <source></source>
-        <target>Test Name</target>
-      </trans-unit>
-      <trans-unit id="MSC.ConnectorsTitle">
-        <source></source>
-        <target>Test Title</target>
+            <trans-unit id="connectors.title.0">
+        <target>Name</target>
       </trans-unit>
     </body>
   </file>
 </xliff>
+

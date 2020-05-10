@@ -10,7 +10,7 @@
 {% block main %}
 
 	<div id="tl_buttons">
-		<a href="contao/ftp-connections" class="header_back" title="" onclick="Backend.getScrollOffset()">zur&uuml;ck</a>
+		<a href="contao/ftp-connections" class="header_back" title="" onclick="Backend.getScrollOffset()">{{ 'MSC.goBack'|trans({}, 'contao_default') }}</a>
 	</div>
 	<form id="tl_article" class="tl_form tl_edit_form" method="post" action="contao/ftp-connections/config/save?id={{config.id}}">
 		<div class="tl_formbody_edit">

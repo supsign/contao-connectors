@@ -1,7 +1,7 @@
 {% extends "@ContaoCore/Backend/be_page.html.twig" %}
 
 {% block headline %}
-Verbindungen Verwalten
+{{ 'connectors.manageConnections'|trans({}, 'contao_default') }}
 {% endblock %}
 
 {% block error %}
@@ -9,14 +9,15 @@ Verbindungen Verwalten
 
 {% block main %}
   <div id="tl_buttons">
-    <a class="header_new" href="contao/ftp-connections/edit">Server Hinzuf&uuml;gen</a>
+    <a class="header_new" href="contao/ftp-connections/edit">{{ 'connectors.addServer'|trans({}, 'contao_default') }}</a>
   </div>
 
 <div class="tl_listing_container tree_view supsign-connectors" id="tl_listing">
     <ul class="tl_listing tl_tree_xtnd">
       <li class="tl_folder_top cf">
         <div class="tl_left">
-          <label>Verbindungen</label>
+          <label>{{ 'connectors.connections'|trans({}, 'contao_default') }}
+</label>
         </div>
         <div class="tl_right">&nbsp;</div>
       </li>
@@ -41,7 +42,9 @@ Verbindungen Verwalten
         {% for config in ftpConnection.syncConfigs %}
           <ul class="level_0">
             <li class="tl_file">
-              <div class="tl_left"><strong>{{config.title}}</strong> Lokal: <i>{{config.sourcePath}}</i> Remote: <i>{{config.destinationPath}}</i></div>
+              <div class="tl_left"><strong>{{config.title}}</strong>
+                {{ 'connectors.sourcePath.0'|trans({}, 'contao_default') }}: <i>{{config.sourcePath}}</i>
+                {{ 'connectors.estinationPath.0'|trans({}, 'contao_default') }}: <i>{{config.destinationPath}}</i></div>
 
               <div class="tl_content_right">
                 <a href="contao/ftp-connections/config/edit?id={{config.id}}" title="" class="edit"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Element bearbeiten"></a>

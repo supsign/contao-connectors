@@ -41,7 +41,7 @@ Verbindungen Verwalten
         {% for config in ftpConnection.syncConfigs %}
           <ul class="level_0">
             <li class="tl_file">
-              <div class="tl_left"><strong>{{config.title}}</strong> Lokal: <i>{{config.sourcePath}}</i> Remote:<i>{{config.destinationPath}}</i></div>
+              <div class="tl_left"><strong>{{config.title}}</strong> Lokal: <i>{{config.sourcePath}}</i> Remote: <i>{{config.destinationPath}}</i></div>
 
               <div class="tl_content_right">
                 <a href="contao/ftp-connections/config/edit?id={{config.id}}" title="" class="edit"><img src="system/themes/flexible/icons/edit.svg" width="16" height="16" alt="Element bearbeiten"></a>

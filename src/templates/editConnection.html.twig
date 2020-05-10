@@ -58,14 +58,62 @@
 				</div>
 
 			</fieldset>
-		</div>
 		
-		Server<input type="text" value="{{ftpEntry.server}}" name="server"/><br/>
-		Port<input type="text" value="{{ftpEntry.port}}" name="port"/><br/>
-		User<input type="text" value="{{ftpEntry.user}}" name="user"/><br/>
-		Password<input type="text" value="{{ftpEntry.password}}" name="password"/><br/>
-		<br/>
-		<input type="submit">
+			<fieldset id="pal_server_legend" class="tl_tbox">
+				<legend onclick="AjaxRequest.toggleFieldset(this,'server_legend','tl_article')">Server-Einstellungen</legend>
+
+				<div class="w50 clr widget">
+					<h3>
+						<label for="ctrl_server" class="mandatory">
+							<span class="invisible">Mandatory field </span>
+							Server-Adresse
+							<span class="mandatory">*</span>
+						</label>
+					</h3>
+					<input type="text" name="server" id="ctrl_server" class="tl_text mandatory" value="{{ftpEntry.server}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
+					<p class="tl_help tl_tip" title="">Bitte f&uuml;gen Sie einen eindeutigen Namen f&uuml;r die Verbindung hinzu.</p>
+				</div>
+				
+				<div class="w50 widget">
+					<h3>
+						<label>
+						  	<span class="invisible">Mandatory field </span>
+							Port
+							<span class="mandatory">*</span>
+					   </label>
+					</h3>
+					
+				  	<input type="number" name="port" id="ctrl_port" class="tl_text mandatory" value="{{ftpEntry.port}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
+
+		  			<p class="tl_help tl_tip" title="">W&auml;hlen Sie den gew&uuml;nschte Port.</p>
+				</div>
+
+				<div class="w50 clr widget">
+					<h3>
+						<label for="ctrl_user" class="mandatory">
+							<span class="invisible">Mandatory field </span>
+							Benutzer
+							<span class="mandatory">*</span>
+						</label>
+					</h3>
+					<input type="text" name="user" id="ctrl_user" class="tl_text mandatory" value="{{ftpEntry.user}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
+					<p class="tl_help tl_tip" title="">Bitte f&uuml;gen Sie einen eindeutigen Namen f&uuml;r die Verbindung hinzu.</p>
+				</div>
+
+				<div class="w50 widget">
+					<h3>
+						<label for="ctrl_password" class="mandatory">
+							<span class="invisible">Mandatory field </span>
+							Passwort
+							<span class="mandatory">*</span>
+						</label>
+					</h3>
+					<input type="text" name="password" id="ctrl_password" class="tl_text mandatory" value="{{ftpEntry.password}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
+					<p class="tl_help tl_tip" title="">Bitte f&uuml;gen Sie einen eindeutigen Namen f&uuml;r die Verbindung hinzu.</p>
+				</div>
+
+			</fieldset>
+		</div>
 
 		<div class="tl_formbody_submit">
 			<div class="tl_submit_container">

@@ -207,7 +207,7 @@ class BackendController extends AbstractController
     {
         $blubb = new FtpConnection;
 
-        $blubb->iterate();
+        $blubb->test();
         
 
 

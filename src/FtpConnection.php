@@ -15,6 +15,7 @@ class FtpConnection {
 		$protocol = null,
 		$server = null,
 		$sftp = null,
+		$syncConfigs = null,
 		$user = null;
 
 	public function __construct() {
@@ -43,6 +44,19 @@ class FtpConnection {
 
 	}
 
+	public function downloadFile($localFile, $remoteFile) {
+		switch ($this->protocol) {
+			case 'FTP':
+				# code...
+				break;
+						
+			case 'SFTP':
+			default:
+				# code...
+				break;
+		}
+	}
+
 	public function login() {
 		switch ($this->protocol) {
 			case 'FTP':
@@ -65,6 +79,16 @@ class FtpConnection {
 		return $this;
 	}
 
+	public function readLocalDirectory() {
+		
+		return $this;
+	}
+
+	public function readRemoteDirectory() {
+
+		return $this;
+	}
+
 	public function uploadFile($localFile, $remoteFile) {
 		switch ($this->protocol) {
 			case 'FTP':
@@ -73,9 +97,7 @@ class FtpConnection {
 						
 			case 'SFTP':
 			default:
-				$csv_filename = 'home/test.csv';
-
-			    $resFile = fopen("ssh2.sftp://{$this->sftp}/".$csv_filename, 'w');
+			    $resFile = fopen("ssh2.sftp://{$this->sftp}/".$remoteFile, 'w');
 			    fwrite($resFile, 'Testing');
 			    fclose($resFile);  
 
@@ -85,45 +107,49 @@ class FtpConnection {
         return $this;
 	}
 
-	public function iterate() {
-		foreach ($this->ftpConnections AS $connection) {
-			$this->protocol = $connection->getProtocol()->getTitle();
-			$this->server 	= $connection->getServer();
-			$this->port   	= $connection->getPort();
-			$this->password = $connection->getPassword();
-			$this->user 	= $connection->getUser();
-
-			$this->connect();
-		}
-		
-		return $this;
-	}
-
 	public function setConnection($title) {
 		foreach ($this->ftpConnections AS $connection) {
 			if ($connection->getTitle() == $title) {
-				$this->protocol = $connection->getProtocol()->getTitle();
-				$this->server 	= $connection->getServer();
-				$this->port   	= $connection->getPort();
-				$this->password = $connection->getPassword();
-				$this->user 	= $connection->getUser();
+				$this->protocol 	= $connection->getProtocol()->getTitle();
+				$this->server 		= $connection->getServer();
+				$this->port   		= $connection->getPort();
+				$this->password 	= $connection->getPassword();
+				$this->user 		= $connection->getUser();
+				$this->syncConfigs  = $connection->getSyncConfigs();
 			}
 		}
 
-
-
+		return $this->connect();
 	}
 
 	public function test() {
 		$this->setConnection('test verbindung');
-		$this->connect();
 
-		$source = '/Applications/MAMP/htdocs/autosync.supsign.dev/files/swiss-vr.sql.zip';
-		$destination = 'home/swiss-vr.sql.zip';
+		foreach ($this->syncConfigs AS $syncConfig) {
+			$filename 	 = 'testfile.csv';
+			$source   	 = $syncConfig->getSourcePath().$filename;
+			$destination = $syncConfig->getDestinationPath().$filename;
 
-		$this->uploadFile($source, $destination);
+			$this->uploadFile($source, $destination);
+		}
 
-
+		return $this;
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

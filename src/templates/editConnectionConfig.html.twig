@@ -13,51 +13,47 @@
 		<a href="contao/ftp-connections" class="header_back" title="" onclick="Backend.getScrollOffset()">zur&uuml;ck</a>
 	</div>
 	<form id="tl_article" class="tl_form tl_edit_form" method="post" action="contao/ftp-connections/config/save?id={{config.id}}">
+		{% if ftpConnection_id %}<input type="hidden" name="ftpConnection" value="{{ftpConnection_id}}">{% endif %}
 		<div class="tl_formbody_edit">
 			<fieldset id="pal_title_legend" class="tl_tbox">
 				<legend onclick="AjaxRequest.toggleFieldset(this,'title_legend','tl_article')">Allgemeine Einstellungen</legend>
-
+	                <div class="widget">
+						<h3>
+							<label for="ctrl_title" class="mandatory">
+								<span class="invisible">Mandatory field </span>
+								Name
+								<span class="mandatory">*</span>
+							</label>
+						</h3>
+						<input type="text" name="title" id="ctrl_title" class="tl_text mandatory" value="{{config.title}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
+						<p class="tl_help tl_tip" title="">Bitte f&uuml;gen Sie einen eindeutigen Namen f&uuml;r die Verbindung hinzu.</p>
+					</div>
 				
-                
-                
-                <div class="widget">
-					<h3>
-						<label for="ctrl_title" class="mandatory">
-							<span class="invisible">Mandatory field </span>
-							Name
-							<span class="mandatory">*</span>
-						</label>
-					</h3>
-					<input type="text" name="title" id="ctrl_title" class="tl_text mandatory" value="{{config.title}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
-					<p class="tl_help tl_tip" title="">Bitte f&uuml;gen Sie einen eindeutigen Namen f&uuml;r die Verbindung hinzu.</p>
-				</div>
-				
-                <div class="clr w50 widget">
-					<h3>
-						<label for="ctrl_sourcePath" class="mandatory">
-							<span class="invisible">Mandatory field </span>
-Lokal							<span class="mandatory">*</span>
-						</label>
-					</h3>
-					<input type="text" name="sourcePath" id="ctrl_sourcePath" class="tl_text mandatory" value="{{config.sourcePath}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
-					<p class="tl_help tl_tip" title="">Bitte f&uuml;gen Sie einen eindeutigen Namen f&uuml;r die Verbindung hinzu.</p>
-				</div>
+	                <div class="clr w50 widget">
+						<h3>
+							<label for="ctrl_sourcePath" class="mandatory">
+								<span class="invisible">Mandatory field </span>
+								Lokal						
+								<span class="mandatory">*</span>
+							</label>
+						</h3>
+						<input type="text" name="sourcePath" id="ctrl_sourcePath" class="tl_text mandatory" value="{{config.sourcePath}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
+						<p class="tl_help tl_tip" title="">Bitte f&uuml;gen Sie einen eindeutigen Namen f&uuml;r die Verbindung hinzu.</p>
+					</div>
 
-				<div class="w50 widget">
-					<h3>
-						<label for="ctrl_destinationPath" class="mandatory">
-							<span class="invisible">Mandatory field </span>
-Remote							<span class="mandatory">*</span>
-						</label>
-					</h3>
-					<input type="text" name="destinationPath" id="ctrl_destinationPath" class="tl_text mandatory" value="{{config.destinationPath}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
-					<p class="tl_help tl_tip" title="">F&uuml;r das soll die Verbindung eingesetzt werden.</p>
-				</div>
-
+					<div class="w50 widget">
+						<h3>
+							<label for="ctrl_destinationPath" class="mandatory">
+								<span class="invisible">Mandatory field </span>
+								Remote
+								<span class="mandatory">*</span>
+							</label>
+						</h3>
+						<input type="text" name="destinationPath" id="ctrl_destinationPath" class="tl_text mandatory" value="{{config.destinationPath}}" required="" maxlength="255" onfocus="Backend.getScrollOffset()">
+						<p class="tl_help tl_tip" title="">F&uuml;r das soll die Verbindung eingesetzt werden.</p>
+					</div>
 			</fieldset>
-		
 		</div>
-
 		<div class="tl_formbody_submit">
 			<div class="tl_submit_container">
 				<button type="submit" name="save" id="save" class="tl_submit" accesskey="s">Speichern und zur&uuml;ck</button> 

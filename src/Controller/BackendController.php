@@ -79,7 +79,6 @@ class BackendController extends AbstractController
             $ftpConnection_id = $entry->getFtpConnection()->getId();
         }
 
-
         $data = array(
             'config' => $entry,
             'ftpConnection_id' => $ftpConnection_id

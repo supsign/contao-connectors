@@ -37,13 +37,13 @@ class FtpSyncConfigs
      * @var string
      * @ORM\Column(type="string", options={"default" : ""}, nullable=true)
      */
-    protected $sourcePath;
+    protected $localPath;
 
     /**
      * @var string
      * @ORM\Column(type="string", options={"default" : ""}, nullable=true)
      */
-    protected $destinationPath;
+    protected $remotePath;
 
     /**
      * @ORM\ManyToOne(targetEntity="FtpData", inversedBy="syncConfigs")
@@ -120,53 +120,84 @@ class FtpSyncConfigs
     }
 
     /**
-     * Get the value of sourcePath
+     * Get the value of localPath
      *
      * @return  string
+     */ 
+    public function getLocalPath()
+    {
+        return $this->localPath;
+    }
+
+    /**
+     * Set the value of localPath
+     *
+     * @param  string  $localPath
+     *
+     * @return  self
+     */ 
+    public function setLocalPath(string $localPath)
+    {
+        $this->localPath = $localPath;
+
+        return $this;
+    }
+
+    /**
+     * Alias of getLocalPath
      */ 
     public function getSourcePath()
     {
-        return $this->sourcePath;
+        return $this->getlocalPath();
     }
 
     /**
-     * Set the value of sourcePath
-     *
-     * @param  string  $sourcePath
-     *
-     * @return  self
+     * Alias of setLocalPath
      */ 
     public function setSourcePath(string $sourcePath)
     {
-        $this->sourcePath = $sourcePath;
-
-        return $this;
+        return $this->setlocalPath($sourcePath);
     }
 
     /**
-     * Get the value of destinationPath
+     * Get the value of remotePath
      *
      * @return  string
      */ 
-    public function getDestinationPath()
+    public function getRemotePath()
     {
-        return $this->destinationPath;
+        return $this->remotePath;
     }
 
     /**
-     * Set the value of destinationPath
+     * Set the value of remotePath
      *
-     * @param  string  $destinationPath
+     * @param  string  $remotePath
      *
      * @return  self
      */ 
-    public function setDestinationPath(string $destinationPath)
+    public function setRemotePath(string $remotePath)
     {
-        $this->destinationPath = $destinationPath;
+        $this->remotePath = $remotePath;
 
         return $this;
     }
 
+    /**
+     * Alias of getRemotePath
+     */ 
+    public function getDestinationPath()
+    {
+        return $this->getRemotePath();
+    }
+
+    /**
+     * Alias of setRemotePath
+     */ 
+    public function setDestinationPath(string $destinationPath)
+    {
+        return $this->setRemotePath($destinationPath);
+    }
 
     /**
      * Get the value of ftpConnection

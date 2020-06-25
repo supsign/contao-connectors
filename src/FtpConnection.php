@@ -7,19 +7,21 @@ use Supsign\ContaoConnectorsBundle\EntityManagerTrait;
 class FtpConnection {
 	use EntityManagerTrait;
 
-	private 
+	protected 
 		$connection = null,
+		$dateFormat = 'D.m.Y H:i:s',
+		$file = null,
 		$files = null,
 		$ftpConnections = [],
 		$localDirectory = null,
 		$localFile = null,
+		$login = null,
 		$remoteDirectory = null,
 		$remoteFile = null,
 		$password = null,
 		$port = null,
 		$protocol = null,
 		$server = null,
-		$sftp = null,
 		$syncConfigs = null,
 		$user = null;
 
@@ -39,12 +41,10 @@ class FtpConnection {
 				break;
 		}
 
-		// var_dump($this->server);
-
         if (!$this->connection)
             throw new \Exception('Could not connect to "'.$this->server.'" on port "'.$this->port.'".');
 
-		return $this->login();
+		return $this;
 	}
 
 	protected function disconnect() {
@@ -67,21 +67,53 @@ class FtpConnection {
 	protected function getFiles() {
 		return array_keys(
 			array_merge(
-				array_flip($this->getLocalDirectory()),
-				array_flip($this->getRemoteDirectory())
+				array_flip($this->readLocalDirectory()),
+				array_flip($this->readRemoteDirectory())
 			)
 		);	
 	}
 
-	protected function getLocalDirectory() {
-		return self::scanDir($this->localDirectory);
+	protected function getFilePath($source) {
+		switch ($source) {
+			case 'local': return $this->localFile;
+			case 'remote': return $this->remoteFile;
+			default: throw new \Exception('invalid file source');
+		}
 	}
 
-	protected function getRemoteDirectory() {
-		return self::scanDir('ssh2.sftp://'.$this->sftp.'/'.$this->remoteDirectory);
+	protected function getFileHash($source) {
+		return hash_file('md5', $this->getFilePath($source)) ;
+	}
+
+	protected function getFileTime($source, $format = null) {
+		$filetime = filemtime($this->getFilePath($source));
+
+		if ($format AND $filetime)
+			return (new \DateTime())->setTimestamp($filetime)->format($format);
+
+		return $filetime;
+	}
+
+	protected function getLocalFileHash(){
+		return $this->getFileHash('local');
+	}
+
+	protected function getLocalFileTime($format = null) {
+		return $this->getFileTime('local', $format);
+	}
+
+	protected function getRemoteFileHash(){
+		return $this->getFileHash('remote');
+	}
+
+	protected function getRemoteFileTime($format = null) {
+		return $this->getFileTime('remote', $format);
 	}
 
 	protected function login() {
+		if (!$this->connection)
+			$this->connect();
+
 		switch ($this->protocol) {
 			case 'FTP':
 				# code...
@@ -92,9 +124,9 @@ class FtpConnection {
 				if (!ssh2_auth_password($this->connection, $this->user, $this->password) )	//	SSH key variant? 
 					throw new \Exception('Could not authenticate with username '.$username.' and password '.$password);
 
-		        $this->sftp = ssh2_sftp($this->connection);
+		        $this->login = ssh2_sftp($this->connection);
 
-		        if (!$this->sftp)
+		        if (!$this->login)
 		            throw new \Exception('Could not initialize SFTP subsystem.');
 
 				break;
@@ -103,7 +135,7 @@ class FtpConnection {
 		return $this;
 	}
 
-	protected function uploadFile($localFile, $remoteFile) {
+	protected function uploadFile($localFile, $remoteFile) {	//	deprecated
 		switch ($this->protocol) {
 			case 'FTP':
 				# code...
@@ -111,14 +143,34 @@ class FtpConnection {
 						
 			case 'SFTP':
 			default:
-			    $resFile = fopen('ssh2.sftp://'.$this->sftp.'/'.$remoteFile, 'w');
-			    fwrite($resFile, file_get_contents($localFile));
-			    fclose($resFile);  
+			    $resFile = fopen('ssh2.sftp://'.$this->login.'/'.$remoteFile, 'w');	//	deprecated
+			    fwrite($resFile, file_get_contents());
+			    fclose($resFile);
 
 				break;
 		}
 
         return $this;
+	}
+
+	protected function readLocalDirectory() {
+		return self::scanDir($this->localDirectory);
+	}
+
+	protected function readFile($source) {
+		return file_get_contents($this->getFilePath($source));
+	}
+
+	protected function readLocalFile() {
+		return $this->readFile('local');
+	}
+
+	protected function readRemoteDirectory() {
+		return self::scanDir($this->remoteDirectory);
+	}
+
+	protected function readRemoteFile() {
+		return $this->readFile('remote');
 	}
 
 	protected function setConnection($title) {
@@ -136,8 +188,22 @@ class FtpConnection {
 		return $this->connect();
 	}
 
-	public function test() {
-		$this->syncConnections();
+	protected function setLocalDirectory($dir) {
+		$this->localDirectory = $dir;
+
+		return $this;
+	}
+
+	protected function setRemoteDirectory($dir) {
+		switch ($this->protocol) {
+			case 'SFTP':
+				$this->remoteDirectory = 'ssh2.sftp://'.$this->login.$dir;
+				break;
+			
+			default:
+				$this->remoteDirectory = $dir;
+				break;
+		}
 
 		return $this;
 	}
@@ -163,11 +229,11 @@ class FtpConnection {
 			$this->user 		= $connection->getUser();
 			$this->syncConfigs  = $connection->getSyncConfigs();
 
-			$this->connect();
+			$this->login();
 
 			foreach ($this->syncConfigs AS $syncConfig) {
-				$this->localDirectory = $syncConfig->getSourcePath();
-				$this->remoteDirectory = $syncConfig->getDestinationPath();
+				$this->setLocalDirectory($syncConfig->getSourcePath());
+				$this->setRemoteDirectory($syncConfig->getDestinationPath()); 
 
 				$this->syncDirectory();
 			}
@@ -176,10 +242,34 @@ class FtpConnection {
 		return $this;
 	} 
 
+	protected function syncFile() {
+		var_dump($this->file);
+
+		var_dump(
+			[
+				'local' => $this->getLocalFileTime($this->dateFormat),
+				'remote' => $this->getRemoteFileTime($this->dateFormat),
+				'indentical' => $this->getLocalFileHash() == $this->getRemoteFileHash()
+			]
+		);
+
+		echo '<hr>';
+	}
+
 	protected function syncFiles() {
 		foreach ($this->getFiles() AS $file) {
-			var_dump($file);
+			$this->file = $file;
+			$this->localFile = $this->localDirectory.$file;
+			$this->remoteFile = $this->remoteDirectory.$file;
+
+			$this->syncFile();
 		}
+
+		return $this;
+	}
+
+	public function test() {
+		$this->syncConnections();
 
 		return $this;
 	}

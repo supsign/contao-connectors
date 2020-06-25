@@ -110,6 +110,18 @@ class FtpConnection {
 		return $this->getFileTime('remote', $format);
 	}
 
+	protected function fileExists($source) {
+		return file_exists($this->getFilePath($source));
+	}
+
+	protected function fileExistsLocal() {
+		return $this->fileExists('local');
+	}
+
+	protected function fileExistsRemote() {
+		return $this->fileExists('remote');
+	}
+
 	protected function login() {
 		if (!$this->connection)
 			$this->connect();
@@ -245,11 +257,22 @@ class FtpConnection {
 	protected function syncFile() {
 		var_dump($this->file);
 
+		if ($this->getLocalFileTime() == $this->getRemoteFileTime())
+			$newer = '';
+		else
+			$newer = $this->getLocalFileTime() < $this->getRemoteFileTime() ? 'remote' : 'local';
+
 		var_dump(
 			[
-				'local' => $this->getLocalFileTime($this->dateFormat),
-				'remote' => $this->getRemoteFileTime($this->dateFormat),
-				'indentical' => $this->getLocalFileHash() == $this->getRemoteFileHash()
+				'existsLocal' => $this->fileExistsLocal(),
+				'existsRemote' => $this->fileExistsRemote(),
+				'localTime' => $this->getLocalFileTime($this->dateFormat),
+				'remoteTime' => $this->getRemoteFileTime($this->dateFormat),
+				'indentical' => [
+					array('hash' => $this->getLocalFileHash() == $this->getRemoteFileHash()),
+					array('time' => $this->getRemoteFileTime() == $this->getLocalFileTime()),
+				],
+				'newer' => $newer
 			]
 		);
 

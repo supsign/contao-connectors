@@ -9,9 +9,12 @@ class FtpConnection {
 
 	private 
 		$connection = null,
+		$files = null,
 		$ftpConnections = [],
-		$localFolder = null,
-		$remoteFolder = null,
+		$localDirectory = null,
+		$localFile = null,
+		$remoteDirectory = null,
+		$remoteFile = null,
 		$password = null,
 		$port = null,
 		$protocol = null,
@@ -61,6 +64,23 @@ class FtpConnection {
 		}
 	}
 
+	protected function getFiles() {
+		return array_keys(
+			array_merge(
+				array_flip($this->getLocalDirectory()),
+				array_flip($this->getRemoteDirectory())
+			)
+		);	
+	}
+
+	protected function getLocalDirectory() {
+		return self::scanDir($this->localDirectory);
+	}
+
+	protected function getRemoteDirectory() {
+		return self::scanDir('ssh2.sftp://'.$this->sftp.'/'.$this->remoteDirectory);
+	}
+
 	protected function login() {
 		switch ($this->protocol) {
 			case 'FTP':
@@ -83,19 +103,6 @@ class FtpConnection {
 		return $this;
 	}
 
-	protected function readLocalDirectory() {
-
-
-
-
-		return $this;
-	}
-
-	protected function readRemoteDirectory() {
-
-		return $this;
-	}
-
 	protected function uploadFile($localFile, $remoteFile) {
 		switch ($this->protocol) {
 			case 'FTP':
@@ -104,7 +111,7 @@ class FtpConnection {
 						
 			case 'SFTP':
 			default:
-			    $resFile = fopen("ssh2.sftp://{$this->sftp}/".$remoteFile, 'w');
+			    $resFile = fopen('ssh2.sftp://'.$this->sftp.'/'.$remoteFile, 'w');
 			    fwrite($resFile, file_get_contents($localFile));
 			    fclose($resFile);  
 
@@ -130,14 +137,21 @@ class FtpConnection {
 	}
 
 	public function test() {
+		$this->syncConnections();
 
 		return $this;
 	}
 
-	protected function syncConnection() {
-		$localDir = $this->readLocalDirectory();
+	protected static function scanDir($dir) {
+		foreach ($filenames = scandir($dir) AS $key => $filename)
+			if ($filename{0} == '.')
+				unset($filenames[$key]);
 
+		return array_values($filenames);
+	}
 
+	protected function syncDirectory() {
+		return $this->syncFiles();
 	}
 
 	protected function syncConnections() {
@@ -152,15 +166,23 @@ class FtpConnection {
 			$this->connect();
 
 			foreach ($this->syncConfigs AS $syncConfig) {
-				$this->localFolder = $syncConfig->getSourcePath();
-				$this->remoteFolder = $syncConfig->getDestinationPath();
+				$this->localDirectory = $syncConfig->getSourcePath();
+				$this->remoteDirectory = $syncConfig->getDestinationPath();
 
-				$this->syncConnection();
+				$this->syncDirectory();
 			}
 		}
 
 		return $this;
 	} 
+
+	protected function syncFiles() {
+		foreach ($this->getFiles() AS $file) {
+			var_dump($file);
+		}
+
+		return $this;
+	}
 
 }
 

@@ -126,7 +126,7 @@ class FtpSyncConfigs
      */ 
     public function getLocalPath()
     {
-        return $this->localPath;
+        return '/Applications/MAMP/htdocs/autosync.supsign.dev'.$this->addTrailingSlashToPaths($this->localPath);
     }
 
     /**
@@ -166,7 +166,7 @@ class FtpSyncConfigs
      */ 
     public function getRemotePath()
     {
-        return $this->remotePath;
+        return $this->addTrailingSlashToPaths($this->remotePath);
     }
 
     /**
@@ -221,5 +221,12 @@ class FtpSyncConfigs
         $this->ftpConnection = $ftpConnection;
 
         return $this;
+    }
+
+    protected function addTrailingSlashToPaths($string) {
+        if (substr($string, -1) != '/')
+            return $string.'/';
+
+        return $string;
     }
 }

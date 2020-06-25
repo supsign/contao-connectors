@@ -10,6 +10,8 @@ class FtpConnection {
 	private 
 		$connection = null,
 		$ftpConnections = [],
+		$localFolder = null,
+		$remoteFolder = null,
 		$password = null,
 		$port = null,
 		$protocol = null,
@@ -22,7 +24,7 @@ class FtpConnection {
 		$this->ftpConnections = $this->getRepository('FtpData')->findAll();
 	}
 
-	public function connect() {
+	protected function connect() {
 		switch ($this->protocol) {
 			case 'FTP':
 				$this->connection = ftp_connect($this->server, $this->port);
@@ -34,17 +36,19 @@ class FtpConnection {
 				break;
 		}
 
+		// var_dump($this->server);
+
         if (!$this->connection)
             throw new \Exception('Could not connect to "'.$this->server.'" on port "'.$this->port.'".');
 
 		return $this->login();
 	}
 
-	public function disconnect() {
+	protected function disconnect() {
 
 	}
 
-	public function downloadFile($localFile, $remoteFile) {
+	protected function downloadFile($localFile, $remoteFile) {
 		switch ($this->protocol) {
 			case 'FTP':
 				# code...
@@ -57,7 +61,7 @@ class FtpConnection {
 		}
 	}
 
-	public function login() {
+	protected function login() {
 		switch ($this->protocol) {
 			case 'FTP':
 				# code...
@@ -79,17 +83,20 @@ class FtpConnection {
 		return $this;
 	}
 
-	public function readLocalDirectory() {
-		
-		return $this;
-	}
+	protected function readLocalDirectory() {
 
-	public function readRemoteDirectory() {
+
+
 
 		return $this;
 	}
 
-	public function uploadFile($localFile, $remoteFile) {
+	protected function readRemoteDirectory() {
+
+		return $this;
+	}
+
+	protected function uploadFile($localFile, $remoteFile) {
 		switch ($this->protocol) {
 			case 'FTP':
 				# code...
@@ -98,7 +105,7 @@ class FtpConnection {
 			case 'SFTP':
 			default:
 			    $resFile = fopen("ssh2.sftp://{$this->sftp}/".$remoteFile, 'w');
-			    fwrite($resFile, 'Testing');
+			    fwrite($resFile, file_get_contents($localFile));
 			    fclose($resFile);  
 
 				break;
@@ -107,7 +114,7 @@ class FtpConnection {
         return $this;
 	}
 
-	public function setConnection($title) {
+	protected function setConnection($title) {
 		foreach ($this->ftpConnections AS $connection) {
 			if ($connection->getTitle() == $title) {
 				$this->protocol 	= $connection->getProtocol()->getTitle();
@@ -123,18 +130,37 @@ class FtpConnection {
 	}
 
 	public function test() {
-		$this->setConnection('test verbindung');
-
-		foreach ($this->syncConfigs AS $syncConfig) {
-			$filename 	 = 'testfile.csv';
-			$source   	 = $syncConfig->getSourcePath().$filename;
-			$destination = $syncConfig->getDestinationPath().$filename;
-
-			$this->uploadFile($source, $destination);
-		}
 
 		return $this;
 	}
+
+	protected function syncConnection() {
+		$localDir = $this->readLocalDirectory();
+
+
+	}
+
+	protected function syncConnections() {
+		foreach ($this->ftpConnections AS $connection) {
+			$this->protocol 	= $connection->getProtocol()->getTitle();
+			$this->server 		= $connection->getServer();
+			$this->port   		= $connection->getPort();
+			$this->password 	= $connection->getPassword();
+			$this->user 		= $connection->getUser();
+			$this->syncConfigs  = $connection->getSyncConfigs();
+
+			$this->connect();
+
+			foreach ($this->syncConfigs AS $syncConfig) {
+				$this->localFolder = $syncConfig->getSourcePath();
+				$this->remoteFolder = $syncConfig->getDestinationPath();
+
+				$this->syncConnection();
+			}
+		}
+
+		return $this;
+	} 
 
 }
 

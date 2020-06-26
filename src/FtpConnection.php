@@ -52,9 +52,7 @@ class FtpConnection {
 	}
 
 	protected function downloadFile() {
-	    $resFile = fopen($this->localFile, 'w');	//	deprecated
-	    fwrite($resFile, file_get_contents($this->remoteFile));
-	    fclose($resFile);
+		copy($this->remoteFile, $this->localFile);
 
 	    var_dump('downloaded '.$this->file);
 
@@ -145,9 +143,7 @@ class FtpConnection {
 	}
 
 	protected function uploadFile() {
-	    $resFile = fopen($this->remoteFile, 'w');	//	deprecated
-	    fwrite($resFile, file_get_contents($this->localFile));
-	    fclose($resFile);
+		copy($this->localFile, $this->remoteFile);
 
 	    var_dump('uploaded '.$this->file);
 

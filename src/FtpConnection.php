@@ -201,7 +201,7 @@ class FtpConnection {
 	}
 
 	protected function setLocalDirectory($dir) {
-		$this->localDirectory = $dir;
+		$this->localDirectory = '/Applications/MAMP/htdocs/autosync.supsign.dev/'.$dir;
 
 		return $this;
 	}

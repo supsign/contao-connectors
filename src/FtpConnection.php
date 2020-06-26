@@ -166,7 +166,7 @@ class FtpConnection {
 	}
 
 	protected function readLocalDirectory() {
-		return self::scanDir($this->localDirectory);
+		return self::readDirectory($this->localDirectory);
 	}
 
 	protected function readFile($source) {
@@ -178,7 +178,7 @@ class FtpConnection {
 	}
 
 	protected function readRemoteDirectory() {
-		return self::scanDir($this->remoteDirectory);
+		return self::readDirectory($this->remoteDirectory);
 	}
 
 	protected function readRemoteFile() {
@@ -201,7 +201,7 @@ class FtpConnection {
 	}
 
 	protected function setLocalDirectory($dir) {
-		$this->localDirectory = '/Applications/MAMP/htdocs/autosync.supsign.dev/'.$dir;
+		$this->localDirectory = '/Applications/MAMP/htdocs/autosync.supsign.dev'.$dir;
 
 		return $this;
 	}
@@ -220,12 +220,26 @@ class FtpConnection {
 		return $this;
 	}
 
-	protected static function scanDir($dir) {
-		foreach ($filenames = scandir($dir) AS $key => $filename)
-			if ($filename{0} == '.')
-				unset($filenames[$key]);
+	protected static function readDirectory($dir) {
+		$files = [];
 
-		return array_values($filenames);
+		foreach (scandir($dir) AS $entry) {
+			if ($entry{0} == '.')
+				continue;
+
+			if (is_dir($dir.$entry)) {
+				$entry .= '/';
+
+				foreach (self::readDirectory($dir.$entry) AS $subEntry)
+					$files[] = $entry.$subEntry;
+
+				continue;
+			}
+
+			$files[] = $entry;
+		}
+
+		return $files;
 	}
 }
 

@@ -48,7 +48,22 @@ class FtpConnection {
 	}
 
 	protected function disconnect() {
+	}
 
+	protected function delteFile($source) {
+		unlink($this->getFilePath($source));
+
+		var_dump('deleted '.$this->file);
+
+		return $this;
+	}
+
+	protected function deleteLocalFile() {
+		return $this->delteFile('local');
+	}
+
+	protected function deleteRemoteFile() {
+		return $this->delteFile('remote');
 	}
 
 	protected function downloadFile() {
@@ -240,45 +255,19 @@ class FtpConnection {
 	} 
 
 	protected function syncFile() {
-
-
 		switch (true) {
-			case $this->fileExistsLocal() AND !$this->fileExistsRemote():
-			case $this->getLocalFileTime() > $this->getRemoteFileTime():
-				$this->uploadFile();
+			case !$this->fileExistsLocal() AND $this->fileExistsRemote():
+			case $this->getLocalFileTime() < $this->getRemoteFileTime():
+				$this->downloadFile();
 				break;
 
-			case !$this->fileExistsLocal() AND $this->fileExistsRemote():
-				$this->downloadFile();
+			case $this->fileExistsLocal() AND !$this->fileExistsRemote():
+				$this->deleteLocalFile();
 				break;
 
 			default:
 				break;
 		}
-
-
-		// var_dump($this->file);
-
-		// if ($this->getLocalFileTime() == $this->getRemoteFileTime())
-		// 	$newer = '';
-		// else
-		// 	$newer = $this->getLocalFileTime() < $this->getRemoteFileTime() ? 'remote' : 'local';
-
-		// var_dump(
-		// 	[
-		// 		'existsLocal' => $this->fileExistsLocal(),
-		// 		'existsRemote' => $this->fileExistsRemote(),
-		// 		'localTime' => $this->getLocalFileTime($this->dateFormat),
-		// 		'remoteTime' => $this->getRemoteFileTime($this->dateFormat),
-		// 		'indentical' => [
-		// 			array('hash' => $this->getLocalFileHash() == $this->getRemoteFileHash()),
-		// 			array('time' => $this->getRemoteFileTime() == $this->getLocalFileTime()),
-		// 		],
-		// 		'newer' => $newer
-		// 	]
-		// );
-
-		// echo '<hr>';
 
 		return $this;
 	}

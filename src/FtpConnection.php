@@ -51,17 +51,14 @@ class FtpConnection {
 
 	}
 
-	protected function downloadFile($localFile, $remoteFile) {
-		switch ($this->protocol) {
-			case 'FTP':
-				# code...
-				break;
-						
-			case 'SFTP':
-			default:
-				# code...
-				break;
-		}
+	protected function downloadFile() {
+	    $resFile = fopen($this->localFile, 'w');	//	deprecated
+	    fwrite($resFile, file_get_contents($this->remoteFile));
+	    fclose($resFile);
+
+	    var_dump('downloaded '.$this->file);
+
+	    return $this;
 	}
 
 	protected function getFiles() {
@@ -147,20 +144,12 @@ class FtpConnection {
 		return $this;
 	}
 
-	protected function uploadFile($localFile, $remoteFile) {	//	deprecated
-		switch ($this->protocol) {
-			case 'FTP':
-				# code...
-				break;
-						
-			case 'SFTP':
-			default:
-			    $resFile = fopen('ssh2.sftp://'.$this->login.'/'.$remoteFile, 'w');	//	deprecated
-			    fwrite($resFile, file_get_contents());
-			    fclose($resFile);
+	protected function uploadFile() {
+	    $resFile = fopen($this->remoteFile, 'w');	//	deprecated
+	    fwrite($resFile, file_get_contents($this->localFile));
+	    fclose($resFile);
 
-				break;
-		}
+	    var_dump('uploaded '.$this->file);
 
         return $this;
 	}
@@ -255,28 +244,47 @@ class FtpConnection {
 	} 
 
 	protected function syncFile() {
-		var_dump($this->file);
 
-		if ($this->getLocalFileTime() == $this->getRemoteFileTime())
-			$newer = '';
-		else
-			$newer = $this->getLocalFileTime() < $this->getRemoteFileTime() ? 'remote' : 'local';
 
-		var_dump(
-			[
-				'existsLocal' => $this->fileExistsLocal(),
-				'existsRemote' => $this->fileExistsRemote(),
-				'localTime' => $this->getLocalFileTime($this->dateFormat),
-				'remoteTime' => $this->getRemoteFileTime($this->dateFormat),
-				'indentical' => [
-					array('hash' => $this->getLocalFileHash() == $this->getRemoteFileHash()),
-					array('time' => $this->getRemoteFileTime() == $this->getLocalFileTime()),
-				],
-				'newer' => $newer
-			]
-		);
+		switch (true) {
+			case $this->fileExistsLocal() AND !$this->fileExistsRemote():
+			case $this->getLocalFileTime() > $this->getRemoteFileTime():
+				$this->uploadFile();
+				break;
 
-		echo '<hr>';
+			case !$this->fileExistsLocal() AND $this->fileExistsRemote():
+				$this->downloadFile();
+				break;
+
+			default:
+				break;
+		}
+
+
+		// var_dump($this->file);
+
+		// if ($this->getLocalFileTime() == $this->getRemoteFileTime())
+		// 	$newer = '';
+		// else
+		// 	$newer = $this->getLocalFileTime() < $this->getRemoteFileTime() ? 'remote' : 'local';
+
+		// var_dump(
+		// 	[
+		// 		'existsLocal' => $this->fileExistsLocal(),
+		// 		'existsRemote' => $this->fileExistsRemote(),
+		// 		'localTime' => $this->getLocalFileTime($this->dateFormat),
+		// 		'remoteTime' => $this->getRemoteFileTime($this->dateFormat),
+		// 		'indentical' => [
+		// 			array('hash' => $this->getLocalFileHash() == $this->getRemoteFileHash()),
+		// 			array('time' => $this->getRemoteFileTime() == $this->getLocalFileTime()),
+		// 		],
+		// 		'newer' => $newer
+		// 	]
+		// );
+
+		// echo '<hr>';
+
+		return $this;
 	}
 
 	protected function syncFiles() {

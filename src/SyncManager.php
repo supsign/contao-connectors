@@ -52,26 +52,28 @@ class SyncManager extends FtpConnection {
 
 	protected function syncFiles() {
 		foreach ($this->getFiles() AS $file) {
-			$path = explode('/', $file);
-			array_pop($path);
+			$subfolders = explode('/', $file);
+			array_pop($subfolders);
 
-			// foreach ($path AS $)
+			$localPath = $this->localDirectory;
+			$remotePath = $this->remoteDirectory;
 
+			foreach ($subfolders AS $folder) {
+				$localPath .= $folder.'/';
+				$remotePath .= $folder.'/';
 
+				if (!is_dir($localPath))
+					mkdir($localPath);
 
-
-
-			var_dump(
-				array_pop($test),
-				$test
-			);
-
+				if (!is_dir($remotePath))
+					mkdir($remotePath);
+			}
 
 			$this->file = $file;
 			$this->localFile = $this->localDirectory.$file;
 			$this->remoteFile = $this->remoteDirectory.$file;
 
-			// $this->syncFile();
+			$this->syncFile();
 		}
 
 		return $this;

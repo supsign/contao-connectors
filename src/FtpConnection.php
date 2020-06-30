@@ -242,19 +242,3 @@ class FtpConnection {
 		return $files;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

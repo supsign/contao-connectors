@@ -35,7 +35,9 @@ class BackendMenuListener
 		            ->setChildrenAttribute('id', 'supsign');
 
 	        $contentNode = $tree->addChild($node);
-    	}
+    	} else {
+            $contentNode = $tree->getChild('supsign');
+        }
 
         $menuItem = $factory
             ->createItem('connectors')

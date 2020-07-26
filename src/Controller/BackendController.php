@@ -204,11 +204,7 @@ class BackendController extends AbstractController
 
     public function test()
     {
-        $blubb = new SyncManager;
-
-        $blubb->test();
-        
-
+        (new SyncManager)->syncDown();
 
         return new Response(
             $this->get('twig')->render('@ContaoConnectors/test.html.twig', [])

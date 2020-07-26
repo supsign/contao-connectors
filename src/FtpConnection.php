@@ -15,6 +15,7 @@ class FtpConnection {
 		$ftpConnections = [],
 		$localDirectory = null,
 		$localFile = null,
+		$localRootDirectory = '/Applications/MAMP/htdocs/autosync.supsign.dev';
 		$login = null,
 		$remoteDirectory = null,
 		$remoteFile = null,
@@ -195,7 +196,13 @@ class FtpConnection {
 	}
 
 	protected function setLocalDirectory($dir) {
-		$this->localDirectory = '/Applications/MAMP/htdocs/autosync.supsign.dev'.$dir;
+		$this->localDirectory = $this->localRootDirectory.$dir;
+
+		return $this;
+	}
+
+	public function setLocalRootDirectory($dir) {
+		$this->localRootDirectory = $dir;
 
 		return $this;
 	}

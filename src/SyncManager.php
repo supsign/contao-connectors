@@ -5,6 +5,7 @@ namespace Supsign\ContaoConnectorsBundle;
 use Supsign\ContaoConnectorsBundle\EntityManagerTrait;
 
 class SyncManager extends FtpConnection {
+	protected $direction = null;
 
 	protected static function explodeFilePath($file) {
 		return explode('/', $file);
@@ -48,35 +49,60 @@ class SyncManager extends FtpConnection {
 		}
 
 		return $this;
-	} 
+	}
+
+	public function syncDown() {
+		$this->direction = 'down';
+
+		return $this->syncConnections();
+	}
+
+	public function syncUp() {
+		$this->direction = 'up';
+
+		return $this->syncConnections();
+	}
 
 	protected function syncFile() {
-		var_dump($this->file);
+		switch ($this->direction) {
+			case 'down':
+				switch (true) {
+					case !$this->fileExistsLocal() AND $this->fileExistsRemote():
+					case $this->getLocalFileTime() < $this->getRemoteFileTime():
+						$this->downloadFile();
+						break;
 
-		switch (true) {
-			case !$this->fileExistsLocal() AND $this->fileExistsRemote():
-			case $this->getLocalFileTime() < $this->getRemoteFileTime():
-				$this->downloadFile();
+					case $this->fileExistsLocal() AND !$this->fileExistsRemote():
+						$this->deleteLocalFile();
+
+						$dir = self::getFolder($this->file);
+						$dirContents = self::readDirectory($dir);
+						break;
+
+					default:
+						break;
+				}
 				break;
+			
+			case 'up':
+				switch (true) {
+					case $this->fileExistsLocal() AND !$this->fileExistsRemote():
+					case $this->getLocalFileTime() < $this->getRemoteFileTime():
+						$this->uploadFile();
+						break;
 
-			case $this->fileExistsLocal() AND !$this->fileExistsRemote():
-				$this->deleteLocalFile();
+					case !$this->fileExistsLocal() AND $this->fileExistsRemote():
+						$this->deleteLocalFile();
 
-				$dir = self::getFolder($this->file);
-				$dirContents = self::readDirectory($dir);
+						$dir = self::getFolder($this->file);
+						$dirContents = self::readDirectory($dir);
+						break;
 
-				// if (empty($dirContents)) {
-				// 	var_dump('remove empty folder: '.$dir);
-
-				// 	rmdir($dir);
-				// }
-				break;
-
-			default:
+					default:
+						break;
+				}
 				break;
 		}
-
-		echo '<hr/>';
 
 		return $this;
 	}
@@ -93,11 +119,11 @@ class SyncManager extends FtpConnection {
 				$localPath .= $folder.'/';
 				$remotePath .= $folder.'/';
 
-				if (!is_dir($localPath))
+				if ($this->direction == 'down' AND !is_dir($localPath))
 					mkdir($localPath);
 
-				// if (!is_dir($remotePath))
-				// 	mkdir($remotePath);
+				if ($this->direction == 'up' AND !is_dir($remotePath))
+					mkdir($remotePath);
 			}
 
 			$this->file = $file;
@@ -109,11 +135,4 @@ class SyncManager extends FtpConnection {
 
 		return $this;
 	}
-
-	public function test() {
-		$this->syncConnections();
-
-		return $this;
-	}
-
 }

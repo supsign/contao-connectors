@@ -53,8 +53,6 @@ class FtpConnection {
 	protected function delteFile($source) {
 		unlink($this->getFilePath($source));
 
-		var_dump('deleted '.$this->file);
-
 		return $this;
 	}
 
@@ -68,8 +66,6 @@ class FtpConnection {
 
 	protected function downloadFile() {
 		copy($this->remoteFile, $this->localFile);
-
-	    var_dump('downloaded '.$this->file);
 
 	    return $this;
 	}
@@ -159,8 +155,6 @@ class FtpConnection {
 
 	protected function uploadFile() {
 		copy($this->localFile, $this->remoteFile);
-
-	    var_dump('uploaded '.$this->file);
 
         return $this;
 	}

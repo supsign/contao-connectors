@@ -87,7 +87,7 @@ class SyncManager extends FtpConnection {
 			case 'up':
 				switch (true) {
 					case $this->fileExistsLocal() AND !$this->fileExistsRemote():
-					case $this->getLocalFileTime() < $this->getRemoteFileTime():
+					case $this->getLocalFileTime() > $this->getRemoteFileTime():
 						$this->uploadFile();
 						break;
 

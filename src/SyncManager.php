@@ -112,18 +112,18 @@ class SyncManager extends FtpConnection {
 			$subfolders = explode('/', $file);
 			array_pop($subfolders);
 
-			$localPath = $this->localDirectory;
-			$remotePath = $this->remoteDirectory;
+			$localDirectory = $this->localDirectory;
+			$remoteDirectory = $this->remoteDirectory;
 
 			foreach ($subfolders AS $folder) {
-				$localPath .= $folder.'/';
-				$remotePath .= $folder.'/';
+				$localDirectory .= $folder.'/';
+				$remoteDirectory .= $folder.'/';
 
-				if ($this->direction == 'down' AND !is_dir($localPath))
-					mkdir($localPath);
+				if ($this->direction == 'down' AND !is_dir($localDirectory))
+					mkdir($localDirectory);
 
-				if ($this->direction == 'up' AND !is_dir($remotePath))
-					mkdir($remotePath);
+				if ($this->direction == 'up' AND !is_dir($remoteDirectory))
+					mkdir($remoteDirectory);
 			}
 
 			$this->file = $file;

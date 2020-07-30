@@ -12,6 +12,7 @@ class FtpConnection {
 		$dateFormat = 'D.m.Y H:i:s',
 		$file = null,
 		$files = null,
+		$folder = null,
 		$ftpConnections = [],
 		$localDirectory = null,
 		$localFile = null,

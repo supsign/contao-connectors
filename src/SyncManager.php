@@ -25,7 +25,39 @@ class SyncManager extends FtpConnection {
 		return array_pop($path);
 	}
 
+	public function setFolder($value) {
+		if (substr($value, -1) !== '/')
+			$value .= '/';
+
+		$this->folder = $value;
+
+		return $this;
+	}
+
 	protected function syncDirectory() {
+		switch ($this->direction) {
+			case 'down':
+				foreach (explode('/', $this->localDirectory) AS $folder) {
+					$path .= $folder.'/';
+
+					if(!is_dir($path))
+						mkdir($path);
+				}
+				break;
+			
+			case 'up':
+				foreach (explode('/', $this->remoteDirectory) AS $folder) {
+					$path .= $folder.'/';
+
+					if(!is_dir($path))
+						mkdir($path);
+				}
+				break;
+
+			default:
+				throw new \Exception('no sync direction set');
+		}
+
 		return $this->syncFiles();
 	}
 
@@ -41,8 +73,8 @@ class SyncManager extends FtpConnection {
 			$this->login();
 
 			foreach ($this->syncConfigs AS $syncConfig) {
-				$this->setLocalDirectory($syncConfig->getSourcePath());
-				$this->setRemoteDirectory($syncConfig->getDestinationPath()); 
+				$this->setLocalDirectory($syncConfig->getSourcePath().$this->folder);
+				$this->setRemoteDirectory($syncConfig->getDestinationPath().$this->folder);
 
 				$this->syncDirectory();
 			}

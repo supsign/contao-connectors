@@ -16,7 +16,7 @@ class FtpConnection {
 		$ftpConnections = [],
 		$localDirectory = null,
 		$localFile = null,
-		$localRootDirectory = TL_ROOT.'/files',
+		$localRootDirectory = TL_ROOT.'/files',		//	deprecated : use $rootDir = System::getContainer()->getParameter('kernel.project_dir');
 		$login = null,
 		$remoteDirectory = null,
 		$remoteFile = null,

@@ -94,6 +94,9 @@ class FtpConnection {
 	}
 
 	protected function getFileTime($source, $format = null) {
+		if (!file_exists($this->getFilePath($source)))
+			return false;
+
 		$filetime = filemtime($this->getFilePath($source));
 
 		if ($format AND $filetime)
@@ -225,9 +228,17 @@ class FtpConnection {
 	protected static function readDirectory($dir) {
 		$files = [];
 
-		foreach (scandir($dir) AS $entry) {
+		$currentDir = scandir($dir);
+
+		foreach ($currentDir AS $entry) {
 			if ($entry{0} == '.')
 				continue;
+
+			if ($entry{0} == '~')
+				continue;
+
+			if (in_array('.baseDir.ini', $currentDir))
+				$entry .= '/web';
 
 			if (is_dir($dir.$entry)) {
 				$entry .= '/';

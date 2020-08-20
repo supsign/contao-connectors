@@ -228,30 +228,31 @@ class FtpConnection {
 	protected static function readDirectory($dir) {
 		$files = [];
 
-		$currentDir = scandir($dir);
+		if (file_exists($dir) AND is_dir($dir)) {
+			$currentDir = scandir($dir);
 
-		foreach ($currentDir AS $entry) {
-			if ($entry{0} == '.')
-				continue;
+			foreach ($currentDir AS $entry) {
+				if ($entry{0} == '.')
+					continue;
 
-			if ($entry{0} == '~')
-				continue;
+				if ($entry{0} == '~')
+					continue;
 
-			if (in_array('.baseDir.ini', $currentDir))
-				$entry .= '/web';
+				if (in_array('.baseDir.ini', $currentDir))
+					$entry .= '/web';
 
-			if (is_dir($dir.$entry)) {
-				$entry .= '/';
+				if (is_dir($dir.$entry)) {
+					$entry .= '/';
 
-				foreach (self::readDirectory($dir.$entry) AS $subEntry)
-					$files[] = $entry.$subEntry;
+					foreach (self::readDirectory($dir.$entry) AS $subEntry)
+						$files[] = $entry.$subEntry;
 
-				continue;
+					continue;
+				}
+
+				$files[] = $entry;
 			}
-
-			$files[] = $entry;
 		}
-
 		return $files;
 	}
 }

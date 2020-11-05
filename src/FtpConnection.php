@@ -238,7 +238,7 @@ class FtpConnection {
 				if ($entry{0} == '~')
 					continue;
 
-				if (in_array('.baseDir.ini', $currentDir))
+				if (in_array('.baseDir.ini', $currentDir) AND strpos($entry, 'web') === false)
 					$entry .= '/web';
 
 				if (is_dir($dir.$entry)) {
